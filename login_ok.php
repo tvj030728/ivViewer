@@ -4,6 +4,11 @@ if ($_GET['action'] == 'logout') {
   header("Location: ./login/");
 }
 
+if (!is_dir('./data/')) {
+  mkdir('./data/');
+  mkdir('./data/naver/');
+}
+
 if (!isset($_POST[user])) {
   die('빈 값');
 }
