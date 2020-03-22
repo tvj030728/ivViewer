@@ -102,7 +102,7 @@ if ($_COOKIE['login'] == true) {}else{
 <footer class="footer w-100">
 	<hr class="mt-5 mb-4">
 	<div class="text-center my-5 footer-bottom">
-		<p><span style="cursor:pointer;" onclick="location.replace('./system/metadata-creator.php')">메타데이터 등록</span>  |  <span style="cursor:pointer;" onclick="location.replace('login_ok.php?action=logout')">로그아웃</span></p>
+		<p><span style="cursor:pointer;" onclick="location.replace('./system/metadata-creator.php')">메타데이터 등록</span>  |  <span style="cursor:pointer;" onclick="location.replace('./login/change.php')">계정정보 변경</span>  |  <span style="cursor:pointer;" onclick="location.replace('login_ok.php?action=logout')">로그아웃</span></p>
 
 		<p><a href="https://ivlis.kr">ivViewer</a> - 쉽고 빠른 웹툰 뷰어</p>
 	</div>
