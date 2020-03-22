@@ -11,7 +11,8 @@ https://ivlis.kr/
 
 */
 
-include('../config.php');
+$basefolder = "/data/naver/";
+
 if (!isset($_GET['title'])) {
   $processing = array();
   $processed = array();
@@ -235,18 +236,19 @@ $titleget = $_GET['title'];
           array_push($gqthumb, $element1->src);
         }
       }
+			$baseurl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER[HTTP_HOST];
       foreach (array_reverse($gqthumb) as $gq) {
         if(strpos($gq, "front") !== false or strpos($gq, "F.png") !== false) {
             $imgcreatefronturl = $gq;
-            $imgcreatefront = $domain."/system/proxy.php?".$gq;
+            $imgcreatefront = $baseurl."/system/proxy.php?".$gq;
         }
         if(strpos($gq, "back") !== false or strpos($gq, "B.png") !== false) {
             $imgcreatebackurl = $gq;
-            $imgcreateback = $domain."/system/proxy.php?".$gq;
+            $imgcreateback = $baseurl."/system/proxy.php?".$gq;
         }
         if(strpos($gq, "BG") !== false) {
             $imgcreatebgurl = $gq;
-            $imgcreatebg = $domain."/system/proxy.php?".$gq;
+            $imgcreatebg = $baseurl."/system/proxy.php?".$gq;
         }
       }
 
@@ -295,9 +297,6 @@ foreach ($genre as $put) {
   if (!is_dir('../metadata/genre/'.$put.'/')) {
     mkdir('../metadata/genre/'.$put.'/');
   }
-  $myfile = fopen("../metadata/genre/".$put."/".$titleget, "w") or die("오류발생!");
-  fwrite($myfile, '1');
-  fclose($myfile);
 }
 
 

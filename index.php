@@ -1,6 +1,4 @@
 <?php
-include('config.php');
-
 if ($_COOKIE['login'] == true) {}else{
 	header("Location: ./login/");
 }

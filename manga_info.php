@@ -3,7 +3,9 @@ if ($_COOKIE['login'] == true) {}else{
 	header("Location: ./login/");
 }
 
-include('./config.php');
+$basefolder = "/data/naver/";
+
+
 $mAgent = array("iPhone","iPod","Android","Blackberry",
     "Opera Mini", "Windows ce", "Nokia", "sony" );
 $chkMobile = false;

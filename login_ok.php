@@ -14,10 +14,13 @@ include('config.php');
 
 $value = 0;
 
-if ($account_id == $_POST['user']) {
+$data_str = file_get_contents('config.json');
+$json = json_decode($data_str, true);
+
+if ($account_id == $json['user']) {
   $value = $value + 1;
 }
-if ($account_pw == $_POST['pass']) {
+if ($account_pw == $json['pass']) {
   $value = $value + 1;
 }
 

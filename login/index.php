@@ -1,9 +1,3 @@
-<?php
-include('../config.php');
-if ($domain == "https://example.com") {
-	die('config.php 를 참조하여 설정을 끝내주세요.');
-}
- ?>
 <!DOCTYPE html>
 <html lang="ko">
 <head>

@@ -3,7 +3,7 @@ if ($_COOKIE['login'] == true) {}else{
 	header("Location: ./login/");
 }
 
-include('./config.php');
+$basefolder = "data/naver/";
 
 $za = new ZipArchive();
 
