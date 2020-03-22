@@ -11,6 +11,11 @@ if (!isset($_POST[pass])) {
   die('빈 값');
 }
 
+if (!is_dir('./data/')) {
+  mkdir('./data/');
+  mkdir('./data/naver/');
+}
+
 if (file_exists('config.json')) {
   $value = 0;
 
