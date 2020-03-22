@@ -10,17 +10,16 @@ if (!isset($_POST[user])) {
 if (!isset($_POST[pass])) {
   die('빈 값');
 }
-include('config.php');
 
 $value = 0;
 
 $data_str = file_get_contents('config.json');
 $json = json_decode($data_str, true);
 
-if ($account_id == $json['user']) {
+if ($json['user'] == $_POST['user']) {
   $value = $value + 1;
 }
-if ($account_pw == $json['pass']) {
+if ($json['pass'] == $_POST['pass']) {
   $value = $value + 1;
 }
 
