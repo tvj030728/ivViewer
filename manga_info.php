@@ -60,7 +60,7 @@ for($i=0; $i<sizeof($mAgent); $i++){
 			if ($dh = opendir($dir)){
 				while (($file = readdir($dh)) !== false){
 					if($file == "." || $file == "..") { continue; } else {
-						if(strpos($file, "zip") !== false) {  
+						if(strpos($file, "zip") !== false) {
 						    array_push($files, $file);
 						}
 					}
@@ -96,7 +96,7 @@ for($i=0; $i<sizeof($mAgent); $i++){
 	</div>
 
 </div>
-<footer class="footer w-100">
+<footer class="footer w-100" style="padding-top: 0px;margin-top: 50px;">
 	<hr class="mt-5 mb-4">
 	<div class="text-center my-5 footer-bottom">
 		<p>ivViewer - 쉽고 빠른 웹툰 뷰어</p>
