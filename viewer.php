@@ -109,13 +109,13 @@ $episode = str_replace(".zip", "", $put2);
          if ($now == '0') {
          $pree = "<li class='empty' id='previous-episodeclass=empty'>< <strong><span>이전화</span></strong></li>";
          } else {
-         $pree = "<li style='cursor:pointer;' OnClick=\"location.replace('./viewer.php?title=".$_GET['title']."&episode=".$episodeselect[$pre]."')\">< <strong><span title='이전화'>이전화</span></strong></li>";
+         $pree = "<li style='cursor:pointer;' OnClick=\"location.replace('./viewer.php?title=".urlencode($_GET['title'])."&episode=".urlencode($episodeselect[$pre])."')\">< <strong><span title='이전화'>이전화</span></strong></li>";
          }
 
          if (count($episodeselect) == $next) {
          $nexte = "<li class='empty' id='next-episodeclass=empty'><strong><span>다음화</span></strong> ></li>";
          } else {
-         $nexte = "<li style='cursor:pointer;' OnClick=\"location.replace('./viewer.php?title=".$_GET['title']."&episode=".$episodeselect[$next]."')\"><strong><span title='다음화'>다음화</span></strong> ></li>";
+         $nexte = "<li style='cursor:pointer;' OnClick=\"location.replace('./viewer.php?title=".urlencode($_GET['title'])."&episode=".urlencode($episodeselect[$next])."')\"><strong><span title='다음화'>다음화</span></strong> ></li>";
          }
          ?>
       <script>

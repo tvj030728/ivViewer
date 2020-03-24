@@ -81,7 +81,7 @@ for($i=0; $i<sizeof($mAgent); $i++){
 			}
 			$put = str_replace($_GET['title']." ", "", $put2);;
 			?>
-			<a href="./viewer.php?title=<?php echo $_GET['title']; ?>&episode=<?php echo $originput; ?>" class="item">
+			<a href="./viewer.php?title=<?php echo urlencode($_GET['title']); ?>&episode=<?php echo urlencode($originput); ?>" class="item">
 				<div class="card">
 					<div class="card-header text-center">
 						<div class="item-name"><?php echo str_replace(".zip", "", $put); ?></div>
