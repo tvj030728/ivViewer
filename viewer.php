@@ -122,7 +122,7 @@ $episode = str_replace(".zip", "", $put2);
          $(window).scroll(function() {
          	var scrollHeight = $(document).height();
          	var scrollPosition = $(window).height() + $(window).scrollTop();
-         	if (scrollPosition > scrollHeight - 80) {
+         	if (scrollPosition > scrollHeight - 120) {
          		if(<?php echo $_COOKIE['auto_next'];?> == 1) {
          			if(<?php echo count($episodeselect); ?> == <?php echo $next; ?>) {
          			alert('다음화가 없습니다!');
