@@ -128,7 +128,7 @@ $("img.lazy").lazyload({
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
 	swal({
-		title: '끝!',
+		title: '완료!',
 		text: '메타데이터 등록이 완료되었습니다!',
 		icon: 'success',
 		button: '확인',
@@ -140,7 +140,7 @@ $("img.lazy").lazyload({
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
 	swal({
-		title: '끝!',
+		title: '완료!',
 		text: '아이디:<?php echo $_GET[id]; ?>\n비밀번호:<?php echo $_GET[pw]; ?>\n정보가 변경되었습니다!',
 		icon: 'success',
 		button: '확인',
