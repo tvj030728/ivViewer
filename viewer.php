@@ -5,9 +5,13 @@ if ($_COOKIE['login'] == true) {}else{
 
 $basefolder = "data/naver/";
 
+$randcode = rand(1,999);
+
+copy($basefolder."/".$_GET['title']."/".$_GET['episode'], "data/temp".$randcode.".zip");
+
 $za = new ZipArchive();
 
-$za->open($basefolder."/".$_GET['title']."/".$_GET['episode']);
+$za->open("data/temp".$randcode.".zip");
 
 $list = array();
 
@@ -16,8 +20,8 @@ for( $i = 0; $i < $za->numFiles; $i++ ){
 }
 sort($list);
 
-function imgsrc($basefolder, $title, $episode, $file){
-  $load = "zip://".$basefolder."/".$title."/".$episode."#".$file;
+function imgsrc($randcode, $file){
+  $load = "zip://data/temp".$randcode.".zip#".$file;
   $data = file_get_contents($load);
   echo "<img alt='$file' src='data:image/jpeg;base64,".base64_encode($data)."' />";
 }
@@ -78,7 +82,7 @@ $episode = str_replace(".zip", "", $put2);
             <p align='center'>
               <?php
               foreach ($list as $count) {
-                imgsrc($basefolder, $_GET['title'], $_GET['episode'], $count);
+                imgsrc($randcode, $count);
               }
                ?>
             </p>
@@ -150,3 +154,6 @@ $episode = str_replace(".zip", "", $put2);
       <script src="./asset/js/viewer.js"></script>
 </body>
 </html>
+<?php
+unlink("data/temp".$randcode.".zip");
+ ?>
