@@ -97,7 +97,9 @@ $episode = str_replace(".zip", "", $put2);
 
          foreach ($files as $file) {
              if (!in_array($file, $blacklist)) {
-         	$episodeselect[] = $file;
+							 if(strpos($file, "zip") !== false) {
+									 $episodeselect[] = $file;
+							 }
              }
          }
 

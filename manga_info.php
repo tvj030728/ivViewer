@@ -60,7 +60,9 @@ for($i=0; $i<sizeof($mAgent); $i++){
 			if ($dh = opendir($dir)){
 				while (($file = readdir($dh)) !== false){
 					if($file == "." || $file == "..") { continue; } else {
-						array_push($files, $file);
+						if(strpos($file, "zip") !== false) {  
+						    array_push($files, $file);
+						}
 					}
 				}
 				closedir($dh);
