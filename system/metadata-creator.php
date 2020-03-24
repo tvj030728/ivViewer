@@ -246,7 +246,7 @@ $baseurl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "
             $imgcreatebackurl = $gq;
             $imgcreateback = $baseurl."?".$gq;
         }
-        if(strpos($gq, "BG") !== false) {
+        if(strpos($gq, "object") !== false or strpos($gq, "BG") !== false) {
             $imgcreatebgurl = $gq;
             $imgcreatebg = $baseurl."?".$gq;
         }
