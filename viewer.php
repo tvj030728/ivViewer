@@ -127,7 +127,7 @@ $episode = str_replace(".zip", "", $put2);
          			if(<?php echo count($episodeselect); ?> == <?php echo $next; ?>) {
          			alert('다음화가 없습니다!');
          			} else {
-         			location.replace("./viewer.php?title=<?php echo $_GET['title'];?>&episode=<?php echo $episodeselect[$next];?>");
+         			location.replace("./viewer.php?title=<?php echo urlencode($_GET['title']);?>&episode=<?php echo urlencode($episodeselect[$next]);?>");
          			}
          		}
          	}
