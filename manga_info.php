@@ -37,7 +37,7 @@ for($i=0; $i<sizeof($mAgent); $i++){
 		</div>
 		<div class="header-content position-relative" style="margin-top: 50px;">
 			<div class="container">
-				<img src="./metadata/titles/<?php echo $_GET['title']; ?>/thumb.jpg" style="border-radius: <?php if($chkMobile) {echo '3';} else {echo '10';} ?>%;" <?php if($chkMobile) {echo "width='100%'";} ?>>
+				<img src="./metadata/titles/<?php echo str_replace("+", "%20", urlencode($_GET['title'])); ?>/thumb.jpg" style="border-radius: <?php if($chkMobile) {echo '3';} else {echo '10';} ?>%;" <?php if($chkMobile) {echo "width='100%'";} ?>>
 				<br><br>
 				<h1 class="site-name display-2 text-white font-weight-bold"><?php echo $_GET['title']; ?></h1>
 				<h2 class="header-title text-white"><?php $fp = fopen("./metadata/titles/".$_GET['title']."/writer.txt","r"); $fr = fread($fp, filesize("./metadata/titles/".$_GET['title']."/writer.txt")); fclose($fp); echo $fr; ?></h2>

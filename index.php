@@ -89,7 +89,7 @@ if ($_COOKIE['login'] == true) {}else{
 						<div class="item-name"><?php echo $file; ?></div>
 						<div class="item-category"><?php $fp = fopen("./metadata/titles/$file/writer.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/writer.txt")); fclose($fp); echo $fr; ?></div>
 					</div>
-					<img class="card-img-bottom lazy" data-original="./metadata/titles/<?php echo $file; ?>/thumb.jpg">
+					<img class="card-img-bottom lazy" data-original="./metadata/titles/<?php echo str_replace("+", "%20", urlencode($file)); ?>/thumb.jpg">
 				</div>
 			</a>
 			<?php
