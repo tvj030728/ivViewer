@@ -236,7 +236,7 @@ $titleget = $_GET['title'];
           array_push($gqthumb, $element1->src);
         }
       }
-			$baseurl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER[HTTP_HOST];
+			$baseurl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER[HTTP_HOST].str_replace("metadata-creator", "proxy", $_SERVER['REQUEST_URI']);
       foreach (array_reverse($gqthumb) as $gq) {
         if(strpos($gq, "front") !== false or strpos($gq, "F.png") !== false) {
             $imgcreatefronturl = $gq;
