@@ -171,13 +171,16 @@ if($type == "zip"){
 			 <?php if (count($episodeselect) != $next): ?>
 				 <script type="text/javascript">
 				 $(window).scroll(function() {
+					var counter = 0;
          	var scrollHeight = $(document).height();
          	var scrollPosition = $(window).height() + $(window).scrollTop();
          	if (scrollPosition > scrollHeight / 2) {
          			if(<?php echo count($episodeselect); ?> == <?php echo $next; ?>) {
          			} else {
-								$.get("./system/preload.php?title=<?php echo urlencode($_GET['title']);?>&episode=<?php echo urlencode($episodeselect[$next]);?>", function(data) {
-		 					 });
+								var counter = counter + 1;
+								if (counter == 1) {
+									$.get("./system/preload.php?title=<?php echo urlencode($_GET['title']);?>&episode=<?php echo urlencode($episodeselect[$next]);?>", function(data) {});
+								}
 						 }
          	}
          });
