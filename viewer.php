@@ -179,7 +179,7 @@ if($type == "zip"){
          			if(<?php echo count($episodeselect); ?> == <?php echo $next; ?>) {
          			} else {
 								var c = Number(counter) + Number(counteer);
-								if (c == 1) {
+								if (c < 2) {
 									$.get("./system/preload.php?title=<?php echo urlencode($_GET['title']);?>&episode=<?php echo urlencode($episodeselect[$next]);?>", function(data) {});
 								}
 						 }
