@@ -166,7 +166,6 @@ if($type == "zip"){
          }
          ?>
 			 <?php if (count($episodeselect) != $next): ?>
-				 <!--
 				 <script type="text/javascript">
 				 $(window).scroll(function() {
          	var scrollHeight = $(document).height();
@@ -180,7 +179,6 @@ if($type == "zip"){
          	}
          });
 				 </script>
-			 -->
 			 <?php endif; ?>
       <script>
          $(window).scroll(function() {
