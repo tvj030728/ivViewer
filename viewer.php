@@ -1,6 +1,12 @@
 <?php
+
 if ($_COOKIE['login'] == true) {}else{
 	header("Location: ./login/");
+}
+
+
+if (!is_dir('./data/temp/')) {
+	mkdir('./data/temp/');
 }
 
 $basefolder = "data/naver/";
@@ -18,11 +24,15 @@ if(strpos($_GET['episode'], "zip") !== false) {
 }
 
 if($type == "zip"){
-	copy($basefolder."/".$_GET['title']."/".$_GET['episode'], "data/temp".$randcode.".zip");
+
+	if (file_exists("data/temp/".$_GET['title'].$_GET['episode'])) {
+	} else {
+		copy($basefolder."/".$_GET['title']."/".$_GET['episode'], "data/temp/".$_GET['title'].$_GET['episode']);
+	}
 
 	$za = new ZipArchive();
 
-	$za->open("data/temp".$randcode.".zip");
+	$za->open("data/temp/".$_GET['title'].$_GET['episode']);
 
 	$list = array();
 
@@ -31,8 +41,8 @@ if($type == "zip"){
 	}
 	sort($list);
 
-	function imgsrc($randcode, $file){
-	  $load = "zip://data/temp".$randcode.".zip#".$file;
+	function imgsrc($file){
+	  $load = "zip://data/temp/".$_GET['title'].$_GET['episode']."#".$file;
 	  $data = file_get_contents($load);
 	  echo "<img alt='$file' src='data:image/jpeg;base64,".base64_encode($data)."' />";
 	}
@@ -51,10 +61,13 @@ if($type == "zip"){
 	$put2 = str_replace($_GET['title']." ", "", $put2);
 	$episode = str_replace(".zip", "", $put2);
 } elseif ($type == "png") {
-	copy($basefolder."/".$_GET['title']."/".$_GET['episode'], "data/temp".$randcode.".png");
-	function imgsrc($randcode){
-		$data = file_get_contents("data/temp".$randcode.".png");
-		echo "<img alt='$file' src='data:image/jpeg;base64,".base64_encode($data)."' />";
+	if (file_exists("data/temp/".$_GET['title'].$_GET['episode'])) {
+	} else {
+		copy($basefolder."/".$_GET['title']."/".$_GET['episode'], "data/temp/".$_GET['title'].$_GET['episode']);
+	}
+	function imgsrc(){
+		$data = file_get_contents("data/temp/".$_GET['title'].$_GET['episode']);
+		echo "<img src='data:image/jpeg;base64,".base64_encode($data)."' />";
 	}
 	$p1 = explode(' ', $_GET[episode]);
 	$count = 0;
@@ -74,7 +87,6 @@ if($type == "zip"){
    <head>
       <title><?php echo $_GET[title];?> - <?php echo $episode; ?></title>
       <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.min.js"></script>
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 			<meta name='viewport' content='initial-scale=1, viewport-fit=cover'>
@@ -112,16 +124,16 @@ if($type == "zip"){
               <?php
 							if ($type == "zip") {
 								foreach ($list as $count) {
-	                imgsrc($randcode, $count);
+	                imgsrc($count);
 	              }
 							} elseif ($type == "png") {
-								imgsrc($randcode);
+								imgsrc();
 							}
                ?>
             </p>
          </div>
       </section>
-      <?php
+			<?php
          $path = "./".$basefolder."/".$_GET["title"];
 
          $blacklist = array('');
@@ -153,6 +165,14 @@ if($type == "zip"){
          $nexte = "<li style='cursor:pointer;' OnClick=\"location.replace('./viewer.php?title=".urlencode($_GET['title'])."&episode=".urlencode($episodeselect[$next])."')\"><strong><span title='다음화'>다음화</span></strong> ></li>";
          }
          ?>
+			 <?php if (count($episodeselect) != $next): ?>
+				 <script type="text/javascript">
+				 $(document).ready(function () {
+					 $.get("./system/preload.php?title=<?php echo urlencode($_GET['title']);?>&episode=<?php echo urlencode($episodeselect[$next]);?>", function(data) {
+					 });
+				 });
+				 </script>
+			 <?php endif; ?>
       <script>
          $(window).scroll(function() {
          	var scrollHeight = $(document).height();
@@ -187,12 +207,21 @@ if($type == "zip"){
       </footer>
       <script src="./asset/js/modernizr.js"></script>
       <script src="./asset/js/viewer.js"></script>
+			<?php
+			$dir = "./data/temp/";
+			$files = array();
+			if (is_dir($dir)){
+				if ($dh = opendir($dir)){
+					while (($file = readdir($dh)) !== false){
+						if($file == "." || $file == "..") { continue; } else {
+							if (strtotime(date("Y-m-d H:i:s")) - strtotime(date("Y-m-d H:i:s", filemtime("./data/temp/".$file))) >= 7200) {
+								unlink("./data/temp/".$file);
+							}
+						}
+					}
+					closedir($dh);
+				}
+			}
+			 ?>
 </body>
 </html>
-<?php
-if ($type == "zip") {
-	unlink("data/temp".$randcode.".zip");
-} elseif ($type == "png") {
-	unlink("data/temp".$randcode.".png");
-}
- ?>
