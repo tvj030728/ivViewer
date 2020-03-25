@@ -44,7 +44,7 @@ if($type == "zip"){
 	function imgsrc($file){
 	  $load = "zip://data/temp/".$_GET['title'].$_GET['episode']."#".$file;
 	  $data = file_get_contents($load);
-	  echo "<img alt='$file' src='data:image/jpeg;base64,".base64_encode($data)."' />"
+	  echo "<img alt='$file' src='data:image/jpeg;base64,".base64_encode($data)."' />";
 	}
 
 	//realname
@@ -233,5 +233,8 @@ if($type == "zip"){
 				}
 			}
 			 ?>
+			 <?php if ($countloaded == 0): ?>
+			 	<meta http-equiv="Refresh" content="1;">
+			 <?php endif; ?>
 </body>
 </html>
