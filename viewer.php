@@ -167,10 +167,18 @@ if($type == "zip"){
          ?>
 			 <?php if (count($episodeselect) != $next): ?>
 				 <script type="text/javascript">
-				 $(document).ready(function () {
-					 $.get("./system/preload.php?title=<?php echo urlencode($_GET['title']);?>&episode=<?php echo urlencode($episodeselect[$next]);?>", function(data) {
-					 });
-				 });
+				 $(window).scroll(function() {
+         	var scrollHeight = $(document).height();
+         	var scrollPosition = $(window).height() + $(window).scrollTop();
+         	if (scrollPosition > scrollHeight * 0.5) {
+         			if(<?php echo count($episodeselect); ?> == <?php echo $next; ?>) {
+         			alert('테스트중입니다!');
+         			} else {
+								$.get("./system/preload.php?title=<?php echo urlencode($_GET['title']);?>&episode=<?php echo urlencode($episodeselect[$next]);?>", function(data) {
+		 					 });
+						 }
+         	}
+         });
 				 </script>
 			 <?php endif; ?>
       <script>
