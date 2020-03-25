@@ -172,7 +172,6 @@ if($type == "zip"){
          	var scrollPosition = $(window).height() + $(window).scrollTop();
          	if (scrollPosition > scrollHeight / 2) {
          			if(<?php echo count($episodeselect); ?> == <?php echo $next; ?>) {
-         			alert('테스트중입니다!');
          			} else {
 								$.get("./system/preload.php?title=<?php echo urlencode($_GET['title']);?>&episode=<?php echo urlencode($episodeselect[$next]);?>", function(data) {
 		 					 });
