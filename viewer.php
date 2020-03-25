@@ -5,40 +5,69 @@ if ($_COOKIE['login'] == true) {}else{
 
 $basefolder = "data/naver/";
 
-$randcode = rand(1,999);
+$randcode = rand(1,20);
 
-copy($basefolder."/".$_GET['title']."/".$_GET['episode'], "data/temp".$randcode.".zip");
-
-$za = new ZipArchive();
-
-$za->open("data/temp".$randcode.".zip");
-
-$list = array();
-
-for( $i = 0; $i < $za->numFiles; $i++ ){
-    array_push($list, $za->statIndex( $i )[name]);
-}
-sort($list);
-
-function imgsrc($randcode, $file){
-  $load = "zip://data/temp".$randcode.".zip#".$file;
-  $data = file_get_contents($load);
-  echo "<img alt='$file' src='data:image/jpeg;base64,".base64_encode($data)."' />";
-}
-
-//realname
-
-$p1 = explode(' ', $_GET[episode]);
-$count = 0;
-foreach ($p1 as $p2) {
-	if ($count == 0) {
-		$count = $count + 1;
+if(strpos($_GET['episode'], "zip") !== false) {
+	$type = "zip";
+} else {
+	if(strpos($_GET['episode'], "png") !== false) {
+		$type = "png";
 	} else {
-		$put2 = $put2 . $p2 . " ";
+	  die("옳바르지 않은 파일 타입 입니다.");
 	}
 }
-$put2 = str_replace($_GET['title']." ", "", $put2);
-$episode = str_replace(".zip", "", $put2);
+
+if($type == "zip"){
+	copy($basefolder."/".$_GET['title']."/".$_GET['episode'], "data/temp".$randcode.".zip");
+
+	$za = new ZipArchive();
+
+	$za->open("data/temp".$randcode.".zip");
+
+	$list = array();
+
+	for( $i = 0; $i < $za->numFiles; $i++ ){
+	    array_push($list, $za->statIndex( $i )[name]);
+	}
+	sort($list);
+
+	function imgsrc($randcode, $file){
+	  $load = "zip://data/temp".$randcode.".zip#".$file;
+	  $data = file_get_contents($load);
+	  echo "<img alt='$file' src='data:image/jpeg;base64,".base64_encode($data)."' />";
+	}
+
+	//realname
+
+	$p1 = explode(' ', $_GET[episode]);
+	$count = 0;
+	foreach ($p1 as $p2) {
+		if ($count == 0) {
+			$count = $count + 1;
+		} else {
+			$put2 = $put2 . $p2 . " ";
+		}
+	}
+	$put2 = str_replace($_GET['title']." ", "", $put2);
+	$episode = str_replace(".zip", "", $put2);
+} elseif ($type == "png") {
+	copy($basefolder."/".$_GET['title']."/".$_GET['episode'], "data/temp".$randcode.".png");
+	function imgsrc($randcode){
+		$data = file_get_contents("data/temp".$randcode.".png");
+		echo "<img alt='$file' src='data:image/jpeg;base64,".base64_encode($data)."' />";
+	}
+	$p1 = explode(' ', $_GET[episode]);
+	$count = 0;
+	foreach ($p1 as $p2) {
+		if ($count == 0) {
+			$count = $count + 1;
+		} else {
+			$put2 = $put2 . $p2 . " ";
+		}
+	}
+	$put2 = str_replace($_GET['title']." ", "", $put2);
+	$episode = str_replace(".png", "", $put2);
+}
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -81,9 +110,13 @@ $episode = str_replace(".zip", "", $put2);
          <div id="page-list">
             <p align='center'>
               <?php
-              foreach ($list as $count) {
-                imgsrc($randcode, $count);
-              }
+							if ($type == "zip") {
+								foreach ($list as $count) {
+	                imgsrc($randcode, $count);
+	              }
+							} elseif ($type == "png") {
+								imgsrc($randcode);
+							}
                ?>
             </p>
          </div>
@@ -97,7 +130,7 @@ $episode = str_replace(".zip", "", $put2);
 
          foreach ($files as $file) {
              if (!in_array($file, $blacklist)) {
-							 if(strpos($file, "zip") !== false) {
+							 if(strpos($file, "zip") !== false or strpos($file, "png") !== false) {
 									 $episodeselect[] = $file;
 							 }
              }
@@ -157,5 +190,9 @@ $episode = str_replace(".zip", "", $put2);
 </body>
 </html>
 <?php
-unlink("data/temp".$randcode.".zip");
+if ($type == "zip") {
+	unlink("data/temp".$randcode.".zip");
+} elseif ($type == "png") {
+	unlink("data/temp".$randcode.".png");
+}
  ?>
