@@ -233,8 +233,5 @@ if($type == "zip"){
 				}
 			}
 			 ?>
-			 <?php if ($countloaded == 0): ?>
-			 	<meta http-equiv="Refresh" content="1;">
-			 <?php endif; ?>
 </body>
 </html>
