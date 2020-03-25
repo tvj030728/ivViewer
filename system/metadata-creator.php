@@ -70,9 +70,11 @@ $titleget = $_GET['title'];
 
       //title id 파싱
       $list = array();
-      foreach($html->find('a') as $result){
-        if(strpos($result->href, 'list.nhn') !== false) {
-            array_push($list, str_replace('/webtoon/list.nhn?titleId=', '', $result->href));
+			foreach($html->find('a') as $result){
+				if(strpos($result->href, 'list.nhn') !== false) {
+						if ($result->find('strong')[0]->plaintext == $titleget) {
+							array_push($list, str_replace('/webtoon/list.nhn?titleId=', '', $result->href));
+						}
         }
       }
 
