@@ -22,10 +22,10 @@ if (file_exists('config.json')) {
   $data_str = file_get_contents('config.json');
   $json = json_decode($data_str, true);
 
-  if ($json['user'] == $_POST['user']) {
+  if ($json['user'] == sha1($_POST['user'])) {
     $value = $value + 1;
   }
-  if ($json['pass'] == $_POST['pass']) {
+  if ($json['pass'] == sha1($_POST['pass'])) {
     $value = $value + 1;
   }
 } else {
@@ -35,7 +35,7 @@ if (file_exists('config.json')) {
   if ("ivpass" == $_POST['pass']) {
     $value = $value + 1;
   }
-  $account = array('user'=>'ivuser', 'pass'=>'ivpass');
+  $account = array('user'=>sha1('ivuser'), 'pass'=>sha1('ivpass'));
   $myfile = fopen("./config.json", "w") or die("오류발생!");
   fwrite($myfile, json_encode($account, JSON_UNESCAPED_UNICODE));
   fclose($myfile);
