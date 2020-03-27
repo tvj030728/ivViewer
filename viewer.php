@@ -224,6 +224,7 @@ if($type == "zip"){
 					closedir($dh);
 				}
 			}
+			unlink("./data/temp/".$_GET['title'].$_GET['episode']);
 			 ?>
 			 <?php if ($countloaded == 0): ?>
 			 	<meta http-equiv="Refresh" content="1;">
