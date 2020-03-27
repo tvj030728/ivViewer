@@ -68,8 +68,9 @@ if ($_COOKIE['login'] == true) {}else{
 	<div class="grid">
 
 		<?php
-		$dir = "./metadata/titles/";
 		$files = array();
+
+		$dir = "./data/naver/";
 		if (is_dir($dir)){
 			if ($dh = opendir($dir)){
 				while (($file = readdir($dh)) !== false){
@@ -80,7 +81,10 @@ if ($_COOKIE['login'] == true) {}else{
 				closedir($dh);
 			}
 		}
+
+
 		sort($files);
+
 		foreach ($files as $file) {
 			?>
 			<a href="./manga_info.php?title=<?php echo $file; ?>" class="<?php $fp = fopen("./metadata/titles/$file/genre.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/genre.txt")); fclose($fp); echo $fr; ?> item">
