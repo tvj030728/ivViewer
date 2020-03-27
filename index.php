@@ -25,7 +25,7 @@ if ($_COOKIE['login'] == true) {}else{
 		<div class="header-content position-relative" style="margin-top: 50px;">
 			<div class="container">
 				<h1 class="site-name display-2 text-white font-weight-bold">ivViewer</h1>
-				<h2 class="header-title text-white">쉽고 빠르게 다운로드한 웹툰을 감상하세요.</h2>
+				<h2 class="header-title text-white">[보안패치 1.0.9] : 계정 정보를 꼭 변경 후 이용하세요.</h2>
 			</div>
 		</div>
 	</div>
@@ -86,17 +86,31 @@ if ($_COOKIE['login'] == true) {}else{
 		sort($files);
 
 		foreach ($files as $file) {
-			?>
-			<a href="./manga_info.php?title=<?php echo $file; ?>" class="<?php $fp = fopen("./metadata/titles/$file/genre.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/genre.txt")); fclose($fp); echo $fr; ?> item">
-				<div class="card">
-					<div class="card-header text-center">
-						<div class="item-name"><?php echo $file; ?></div>
-						<div class="item-category"><?php $fp = fopen("./metadata/titles/$file/writer.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/writer.txt")); fclose($fp); echo $fr; ?></div>
+			if (!file_exists("./metadata/titles/$file/titleid.txt")) {
+				?>
+				<a href="./manga_info.php?title=<?php echo $file; ?>" class="item">
+					<div class="card">
+						<div class="card-header text-center">
+							<div class="item-name"><?php echo $file; ?></div>
+							<div class="item-category">메타데이터가 등록되지 않음</div>
+						</div>
+						<img class="card-img-bottom lazy" data-original="./system/dthumb.png">
 					</div>
-					<img class="card-img-bottom lazy" data-original="./metadata/titles/<?php echo str_replace("+", "%20", urlencode($file)); ?>/thumb.jpg">
-				</div>
-			</a>
-			<?php
+				</a>
+				<?php
+			} else {
+				?>
+				<a href="./manga_info.php?title=<?php echo $file; ?>" class="<?php $fp = fopen("./metadata/titles/$file/genre.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/genre.txt")); fclose($fp); echo $fr; ?> item">
+					<div class="card">
+						<div class="card-header text-center">
+							<div class="item-name"><?php echo $file; ?></div>
+							<div class="item-category"><?php $fp = fopen("./metadata/titles/$file/writer.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/writer.txt")); fclose($fp); echo $fr; ?></div>
+						</div>
+						<img class="card-img-bottom lazy" data-original="./metadata/titles/<?php echo str_replace("+", "%20", urlencode($file)); ?>/thumb.jpg">
+					</div>
+				</a>
+				<?php
+			}
 		}
 		?>
 
@@ -108,7 +122,7 @@ if ($_COOKIE['login'] == true) {}else{
 	<div class="text-center my-5 footer-bottom">
 		<p><span style="cursor:pointer;" onclick="location.replace('./system/metadata-creator.php')">메타데이터 등록</span>  |  <span style="cursor:pointer;" onclick="location.replace('./login/change.php')">계정정보 변경</span>  |  <span style="cursor:pointer;" onclick="location.replace('login_ok.php?action=logout')">로그아웃</span></p>
 
-		<p><a href="https://ivlis.kr">ivViewer</a> - 쉽고 빠른 웹툰 뷰어</p>
+		<p><a href="https://ivlis.kr">ivViewer</a>. Developed by <a href="https://ivlis.kr">ivLis.kr</a></p>
 	</div>
 </footer>
 
