@@ -25,7 +25,7 @@ if ($_COOKIE['login'] == true) {}else{
 		<div class="header-content position-relative" style="margin-top: 50px;">
 			<div class="container">
 				<h1 class="site-name display-2 text-white font-weight-bold">ivViewer</h1>
-				<h2 class="header-title text-white">[보안패치 1.0.9] : 계정 정보를 꼭 변경 후 이용하세요.</h2>
+				<h2 class="header-title text-white">[호환패치 1.1.0] : 시범적으로 타 웹툰 플랫폼 메타를 긁어올 수 있습니다.</h2>
 			</div>
 		</div>
 	</div>
