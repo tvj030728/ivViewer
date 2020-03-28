@@ -143,6 +143,8 @@ if($type == "zip"){
 
          $files = preg_grep('/^([^.])/', scandir($path));
 
+				 natsort($files);
+
          foreach ($files as $file) {
              if (!in_array($file, $blacklist)) {
 							 if(strpos($file, "zip") !== false or strpos($file, "png") !== false) {
@@ -150,7 +152,6 @@ if($type == "zip"){
 							 }
              }
          }
-				 natsort($episodeselect);
 
          $now = array_search ($_GET["episode"], $episodeselect);
 
@@ -227,7 +228,7 @@ if($type == "zip"){
 			}
 			unlink("./data/temp/".$_GET['title'].$_GET['episode']);
 			 ?>
-			 <?php if ($countloaded == 0): ?>``
+			 <?php if ($countloaded == 0): ?>
 			 	<meta http-equiv="Refresh" content="1;">
 			 <?php endif; ?>
 </body>
