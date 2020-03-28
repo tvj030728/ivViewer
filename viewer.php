@@ -217,7 +217,7 @@ if($type == "zip"){
 				if ($dh = opendir($dir)){
 					while (($file = readdir($dh)) !== false){
 						if($file == "." || $file == "..") { continue; } else {
-							if (strtotime(date("Y-m-d H:i:s")) - strtotime(date("Y-m-d H:i:s", filemtime("./data/temp/".$file))) >= 7200) {
+							if (strtotime(date("Y-m-d H:i:s")) - strtotime(date("Y-m-d H:i:s", filemtime("./data/temp/".$file))) >= 3600) {
 								unlink("./data/temp/".$file);
 							}
 						}
@@ -227,7 +227,7 @@ if($type == "zip"){
 			}
 			unlink("./data/temp/".$_GET['title'].$_GET['episode']);
 			 ?>
-			 <?php if ($countloaded == 0): ?>
+			 <?php if ($countloaded == 0): ?>``
 			 	<meta http-equiv="Refresh" content="1;">
 			 <?php endif; ?>
 </body>
