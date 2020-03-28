@@ -39,7 +39,7 @@ if($type == "zip"){
 	for( $i = 0; $i < $za->numFiles; $i++ ){
 	    array_push($list, $za->statIndex( $i )[name]);
 	}
-	sort($list);
+	natsort($list);
 
 	function imgsrc($file){
 	  $load = "zip://data/temp/".$_GET['title'].$_GET['episode']."#".$file;
@@ -150,6 +150,7 @@ if($type == "zip"){
 							 }
              }
          }
+				 natsort($episodeselect);
 
          $now = array_search ($_GET["episode"], $episodeselect);
 

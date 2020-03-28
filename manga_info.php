@@ -68,7 +68,7 @@ for($i=0; $i<sizeof($mAgent); $i++){
 				closedir($dh);
 			}
 		}
-		sort($files);
+		natsort($files);
 		foreach ($files as $put) {
 			$originput = $put;
 			$p1 = explode(' ', $put);
