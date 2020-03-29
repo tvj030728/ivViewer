@@ -1,15 +1,15 @@
 <?php
-$logindata = json_decode(file_get_contents('./config.json'), true);
+$logindata = json_decode(file_get_contents('../config.json'), true);
 $logindatauser = $logindata[user];
 $logindatapass =$logindata[pass];
 if ($_COOKIE['login'] == true) {}else{
-	header("Location: ./login/");
+	header("Location: ../login/");
 }
 if (!isset($_COOKIE[$logindatauser])) {
-	header("Location: ./login/");
+	header("Location: ../login/");
 }
 if (!isset($_COOKIE[$logindatapass])) {
-	header("Location: ./login/");
+	header("Location: ../login/");
 }
 
 /*
