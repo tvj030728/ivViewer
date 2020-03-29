@@ -1,6 +1,9 @@
 <?php
 if ($_GET['action'] == 'logout') {
+  $logindata = json_decode(file_get_contents('./config.json'), true);
   setcookie('login');
+  setcookie($logindata[user]);
+  setcookie($logindata[pass]);
   header("Location: ./login/");
 }
 
@@ -43,6 +46,8 @@ if (file_exists('config.json')) {
 
 if ($value == 2) {
   setcookie('login', 'true', time() + 86400 * 30);
+  setcookie(sha1($_POST['user']), 'true', time() + 86400 * 30);
+  setcookie(sha1($_POST['pass']), 'true', time() + 86400 * 30);
   header("Location: ./");
 } else {
   header("Location: ./login/?response=wrong");
