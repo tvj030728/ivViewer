@@ -25,7 +25,7 @@ if ($_COOKIE['login'] == true) {}else{
 		<div class="header-content position-relative" style="margin-top: 50px;">
 			<div class="container">
 				<h1 class="site-name display-2 text-white font-weight-bold">ivViewer</h1>
-				<h2 class="header-title text-white">[1.1.2] 다음 웹툰 지원이 추가되었습니다!</h2>
+				<h2 class="header-title text-white">[1.1.2] 이제 다음 웹툰도 지원합니다!</h2>
 			</div>
 		</div>
 	</div>
