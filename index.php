@@ -34,7 +34,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 		<div class="header-content position-relative" style="margin-top: 50px;">
 			<div class="container">
 				<h1 class="site-name display-2 text-white font-weight-bold">ivViewer</h1>
-				<h2 class="header-title text-white">[1.1.2] 이제 다음 웹툰도 지원합니다!</h2>
+				<h2 class="header-title text-white">쉽고 빠른 웹툰 뷰어</h2>
 			</div>
 		</div>
 	</div>
