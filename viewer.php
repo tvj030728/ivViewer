@@ -32,15 +32,14 @@ if(strpos($_GET['episode'], "zip") !== false) {
 }
 
 if($type == "zip"){
-
-	if (file_exists("data/temp/".$_GET['title'].$_GET['episode'])) {
+	if (file_exists("data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode']))) {
 	} else {
-		copy($basefolder."/".$_GET['title']."/".$_GET['episode'], "data/temp/".$_GET['title'].$_GET['episode']);
+		copy($basefolder."/".$_GET['title']."/".$_GET['episode'], "data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode']));
 	}
 
 	$za = new ZipArchive();
 
-	$za->open("data/temp/".$_GET['title'].$_GET['episode']);
+	$za->open("data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode']));
 
 	$list = array();
 
@@ -50,7 +49,7 @@ if($type == "zip"){
 	natsort($list);
 
 	function imgsrc($file){
-	  $load = "zip://data/temp/".$_GET['title'].$_GET['episode']."#".$file;
+	  $load = "zip://data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode'])."#".$file;
 	  $data = file_get_contents($load);
 	  echo "<img alt='$file' src='data:image/jpeg;base64,".base64_encode($data)."' />";
 	}
@@ -234,7 +233,7 @@ if($type == "zip"){
 					closedir($dh);
 				}
 			}
-			unlink("./data/temp/".$_GET['title'].$_GET['episode']);
+			unlink("./data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode']));
 			 ?>
 			 <?php if ($countloaded == 0): ?>
 			 	<meta http-equiv="Refresh" content="1;">
