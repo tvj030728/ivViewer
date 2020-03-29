@@ -520,7 +520,7 @@ $titleget = $_GET['title'];
 					<br>장르 : $genreforfile
 					<br>섬네일 주소 : $thumb
 					<br>
-					<br>다음 웹툰해서 웹툰 메타데이터를 찾았습니다.
+					<br>다음 웹툰에서 본 작품의 메타데이터를 찾았습니다.
 					<script>history.pushState('', '', './metadata-creator.php');</script>
 					<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."'>";
 				}
