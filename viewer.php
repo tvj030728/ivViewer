@@ -68,7 +68,7 @@ if($type == "zip"){
 	$put2 = str_replace($_GET['title']." ", "", $put2);
 	$episode = str_replace(".zip", "", $put2);
 } elseif ($type == "png") {
-	if (file_exists("data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode'])) {
+	if (file_exists("data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode']))) {
 	} else {
 		copy($basefolder."/".$_GET['title']."/".$_GET['episode'], "data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode']));
 	}
