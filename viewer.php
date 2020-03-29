@@ -68,12 +68,12 @@ if($type == "zip"){
 	$put2 = str_replace($_GET['title']." ", "", $put2);
 	$episode = str_replace(".zip", "", $put2);
 } elseif ($type == "png") {
-	if (file_exists("data/temp/".$_GET['title'].$_GET['episode'])) {
+	if (file_exists("data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode'])) {
 	} else {
-		copy($basefolder."/".$_GET['title']."/".$_GET['episode'], "data/temp/".$_GET['title'].$_GET['episode']);
+		copy($basefolder."/".$_GET['title']."/".$_GET['episode'], "data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode']));
 	}
 	function imgsrc(){
-		$data = file_get_contents("data/temp/".$_GET['title'].$_GET['episode']);
+		$data = file_get_contents("data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode']));
 		echo "<img src='data:image/jpeg;base64,".base64_encode($data)."' />";
 	}
 	$p1 = explode(' ', $_GET[episode]);
