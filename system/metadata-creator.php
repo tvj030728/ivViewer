@@ -83,7 +83,7 @@ $titleget = $_GET['title'];
       //2차 메타데이터 검색
 			if (!isset($list[0])) { // list 비어있으면
 				//다음웹툰 검색 ㄱㄱ
-				$data_str = file_get_contents('http://webtoon.daum.net/data/pc/search?q='.urlencode(str_replace(' ', '', $titleget))));
+				$data_str = file_get_contents('http://webtoon.daum.net/data/pc/search?q='.urlencode(str_replace(' ', '', $titleget)));
 				$json = json_decode($data_str, true);
 
 				foreach ($json[data][webtoon] as $webtoonidfromjson) {
