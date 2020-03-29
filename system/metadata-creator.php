@@ -100,6 +100,16 @@ $titleget = $_GET['title'];
 				    $list[] = $webtoonidfromjson[nickname];
 				  }
 				}
+				
+				$data_str = file_get_contents('http://webtoon.daum.net/data/pc/search?q='.urlencode($titleget));
+				$json = json_decode($data_str, true);
+
+				foreach ($json[data][webtoon] as $webtoonidfromjson) {
+				  if ($titleget == $webtoonidfromjson[title]) {
+				    $list[] = $webtoonidfromjson[nickname];
+				  }
+				}
+				
 				if(!isset($list[0])){ //다음 검색했는데 또 없다?
 					$html = file_get_html('https://www.webtoonguide.com/ko/search?q='.$titleget);
 
