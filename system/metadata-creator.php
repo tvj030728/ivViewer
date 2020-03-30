@@ -158,7 +158,7 @@ $titleget = $_GET['title'];
 						fclose($myfile);
 
 						$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/detail.txt", "w") or die("오류발생!");
-						fwrite($myfile, '메타데이터를 추출 할 수 없습니다.<br>/metadata/titles/'.$titleget.'/ 에서 메타데이터를 수정할 수 있습니다.');
+						fwrite($myfile, '메타데이터를 추출 할 수 없습니다.<br>/metadata/titles/'.$_GET[folder].'-'.$titleget.'/ 에서 메타데이터를 수정할 수 있습니다.');
 						fclose($myfile);
 
 						$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/genre.txt", "w") or die("오류발생!");
