@@ -184,7 +184,7 @@ $("img.lazy").lazyload({
 });
 
 $(document).ready(function () {
-$("#msgivvewer").load("https://tvj030728.github.io/static/");
+$("#msgivvewer").load("https://raw.githubusercontent.com/tvj030728/static/master/index.html");
 });
 </script>
 <?php if ($_GET['response'] == "metafin"): ?>
