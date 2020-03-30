@@ -21,7 +21,7 @@ https://ivlis.kr/
 
 */
 
-$basefolder = "/data/".$_GET['folder']."/";
+$basefolder = "./data/".$_GET['folder']."/";
 
 if (!isset($_GET['title'])) {
   $processing = array();
@@ -49,7 +49,7 @@ if (!isset($_GET['title'])) {
     }
   }
 
-  $dir = "..".$basefolder;
+  $dir = ".".$basefolder;
   if (is_dir($dir)){
     if ($dh = opendir($dir)){
       while (($file = readdir($dh)) !== false){
@@ -179,7 +179,7 @@ $titleget = $_GET['title'];
 							}
 						}
 
-						$dir = "..".$basefolder;
+						$dir = ".".$basefolder;
 						if (is_dir($dir)){
 							if ($dh = opendir($dir)){
 								while (($file = readdir($dh)) !== false){
@@ -303,7 +303,7 @@ $titleget = $_GET['title'];
 								}
 							}
 
-							$dir = "..".$basefolder;
+							$dir = ".".$basefolder;
 							if (is_dir($dir)){
 								if ($dh = opendir($dir)){
 									while (($file = readdir($dh)) !== false){
@@ -386,7 +386,7 @@ $titleget = $_GET['title'];
 								}
 							}
 
-							$dir = "..".$basefolder;
+							$dir = ".".$basefolder;
 							if (is_dir($dir)){
 								if ($dh = opendir($dir)){
 									while (($file = readdir($dh)) !== false){
@@ -502,7 +502,7 @@ $titleget = $_GET['title'];
 						}
 					}
 
-					$dir = "..".$basefolder;
+					$dir = ".".$basefolder;
 					if (is_dir($dir)){
 						if ($dh = opendir($dir)){
 							while (($file = readdir($dh)) !== false){
@@ -687,7 +687,7 @@ if (is_dir($dir)){
   }
 }
 
-$dir = "..".$basefolder;
+$dir = ".".$basefolder;
 if (is_dir($dir)){
   if ($dh = opendir($dir)){
     while (($file = readdir($dh)) !== false){
