@@ -62,6 +62,21 @@ if (!isset($_COOKIE[$logindatapass])) {
 				    closedir($dh);
 				  }
 				}
+				$dir = "./data/";
+				if (is_dir($dir)){
+					if ($dh = opendir($dir)){
+						while (($file = readdir($dh)) !== false){
+							if($file == "." || $file == ".." || $file == "temp") { continue; } else {
+								?>
+								<li class="nav-item">
+									<a href="#" class="nav-link" data-filter=".<?php echo $file; ?>"><?php echo $file; ?></a>
+								</li>
+								<?php
+							}
+						}
+						closedir($dh);
+					}
+				}
 				?>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -113,7 +128,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 		foreach ($files as $file) {
 			if (!file_exists("./metadata/titles/$file[1]-$file[0]/titleid.txt")) {
 				?>
-				<a title="<?php echo $file[1]; ?>/<?php echo $file[0]; ?>" href="./manga_info.php?title=<?php echo $file[0]; ?>&folder=<?php echo $file[1]; ?>" class="item">
+				<a title="<?php echo $file[1]; ?>/<?php echo $file[0]; ?>" href="./manga_info.php?title=<?php echo $file[0]; ?>&folder=<?php echo $file[1]; ?>" class="<?php echo $file[1]; ?> item">
 					<div class="card">
 						<div class="card-header text-center">
 							<div class="item-name"><?php echo $file[0]; ?></div>
@@ -125,7 +140,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 				<?php
 			} else {
 				?>
-				<a title="<?php echo $file[1]; ?>/<?php echo $file[0]; ?>" href="./manga_info.php?title=<?php echo $file[0]; ?>&folder=<?php echo $file[1]; ?>#id=<?php $fp = fopen("./metadata/titles/$file[1]-$file[0]/titleid.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file[1]-$file[0]/titleid.txt")); fclose($fp); echo $fr; ?>" class="<?php $fp = fopen("./metadata/titles/$file[1]-$file[0]/genre.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file[1]-$file[0]/genre.txt")); fclose($fp); echo $fr; ?> item">
+				<a title="<?php echo $file[1]; ?>/<?php echo $file[0]; ?>" href="./manga_info.php?title=<?php echo $file[0]; ?>&folder=<?php echo $file[1]; ?>#id=<?php $fp = fopen("./metadata/titles/$file[1]-$file[0]/titleid.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file[1]-$file[0]/titleid.txt")); fclose($fp); echo $fr; ?>" class="<?php $fp = fopen("./metadata/titles/$file[1]-$file[0]/genre.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file[1]-$file[0]/genre.txt")); fclose($fp); echo $fr; ?> <?php echo $file[1]; ?> item">
 					<div class="card">
 						<div class="card-header text-center">
 							<div class="item-name"><?php echo $file[0]; ?></div>
