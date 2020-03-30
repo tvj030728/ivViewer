@@ -83,7 +83,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 		if (is_dir($dir)){
 			if ($dh = opendir($dir)){
 				while (($file = readdir($dh)) !== false){
-					if($file == "." || $file == "..") { continue; } else {
+					if($file == "." || $file == ".." || $file == "temp") { continue; } else {
 						array_push($filess, $file);
 					}
 				}
