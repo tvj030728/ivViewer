@@ -109,7 +109,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 				<?php
 			} else {
 				?>
-				<a href="./manga_info.php?title=<?php echo $file; ?>" class="<?php $fp = fopen("./metadata/titles/$file/genre.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/genre.txt")); fclose($fp); echo $fr; ?> item">
+				<a href="./manga_info.php?title=<?php echo $file; ?>#id=<?php $fp = fopen("./metadata/titles/$file/titleid.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/titleid.txt")); fclose($fp); echo $fr; ?>" class="<?php $fp = fopen("./metadata/titles/$file/genre.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/genre.txt")); fclose($fp); echo $fr; ?> item">
 					<div class="card">
 						<div class="card-header text-center">
 							<div class="item-name"><?php echo $file; ?></div>

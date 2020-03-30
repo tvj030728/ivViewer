@@ -210,7 +210,7 @@ if($type == "zip"){
                   }
                   ?>
                <li OnClick="location.replace('./index.php')" style='cursor:pointer;'><span title='메인'><i class="fas fa-home"></i></span></li>
-               <li OnClick="location.replace('./manga_info.php?title=<?php echo $_GET['title']; ?>')" style='cursor:pointer;'><span title='<?php echo $_GET['title']; ?> 회차 목록'><i class="fas fa-bars"></i></span></li>
+               <li OnClick="location.replace('./manga_info.php?title=<?php echo $_GET['title']; ?>#id=<?php $fp = fopen("./metadata/titles/$file/titleid.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/titleid.txt")); fclose($fp); echo $fr; ?>')" style='cursor:pointer;'><span title='<?php echo $_GET['title']; ?> 회차 목록'><i class="fas fa-bars"></i></span></li>
                <?php echo $pree;?>
                <?php echo $nexte;?>
             </ul>
