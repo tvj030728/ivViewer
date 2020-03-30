@@ -46,6 +46,22 @@ if (!isset($_COOKIE[$logindatapass])) {
 					<a href="#" class="nav-link active" data-filter="*">전체보기</a>
 				</li>
 				<?php
+				$dir = "./data/";
+				if (is_dir($dir)){
+					if ($dh = opendir($dir)){
+						while (($file = readdir($dh)) !== false){
+							if($file == "." || $file == ".." || $file == "temp") { continue; } else {
+								?>
+								<li class="nav-item">
+									<a href="#" class="nav-link" data-filter=".<?php echo $file; ?>"><?php echo $file; ?></a>
+								</li>
+								<?php
+							}
+						}
+						closedir($dh);
+					}
+				}
+				
 				$dir = "./metadata/genre/";
 
 				if (is_dir($dir)){
@@ -61,21 +77,6 @@ if (!isset($_COOKIE[$logindatapass])) {
 				    }
 				    closedir($dh);
 				  }
-				}
-				$dir = "./data/";
-				if (is_dir($dir)){
-					if ($dh = opendir($dir)){
-						while (($file = readdir($dh)) !== false){
-							if($file == "." || $file == ".." || $file == "temp") { continue; } else {
-								?>
-								<li class="nav-item">
-									<a href="#" class="nav-link" data-filter=".<?php echo $file; ?>"><?php echo $file; ?></a>
-								</li>
-								<?php
-							}
-						}
-						closedir($dh);
-					}
 				}
 				?>
 				<li class="nav-item dropdown">
