@@ -1,3 +1,4 @@
+
 <?php
 $logindata = json_decode(file_get_contents('../config.json'), true);
 $logindatauser = $logindata[user];
@@ -20,7 +21,7 @@ https://ivlis.kr/
 
 */
 
-$basefolder = "/data/naver/";
+$basefolder = "/data/".$_GET['folder']."/";
 
 if (!isset($_GET['title'])) {
   $processing = array();
@@ -41,14 +42,14 @@ if (!isset($_GET['title'])) {
     if ($dh = opendir($dir)){
       while (($file = readdir($dh)) !== false){
         if($file == "." || $file == "..") { continue; } else {
-          array_push($processed, $file);
+          array_push($processed, str_replace($_GET['folder']."-", "", $file));
         }
       }
       closedir($dh);
     }
   }
 
-  $dir = "../".$basefolder."/";
+  $dir = "..".$basefolder;
   if (is_dir($dir)){
     if ($dh = opendir($dir)){
       while (($file = readdir($dh)) !== false){
@@ -62,9 +63,9 @@ if (!isset($_GET['title'])) {
 
   $result = array_diff($processing, $processed);
   sort($result);
-  die("<meta http-equiv='refresh' content='0;url=./metadata-creator.php?title=".$result[0]."'>");
+  die("<meta http-equiv='refresh' content='0;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>");
 } elseif($_GET['title'] == '') {
-	die(header("Location: ../?response=metafin"));
+	die(header("Location: ./metadata.php?action=continue&finish=".$_GET['folder']));
 }
 
 $titleget = $_GET['title'];
@@ -139,46 +140,46 @@ $titleget = $_GET['title'];
 						if (!is_dir('../metadata/titles/')) {
 							mkdir('../metadata/titles/');
 						}
-						if (!is_dir('../metadata/titles/'.$titleget.'/')) {
-							mkdir('../metadata/titles/'.$titleget.'/');
+						if (!is_dir('../metadata/titles/'.$_GET[folder].'-'.$titleget.'/')) {
+							mkdir('../metadata/titles/'.$_GET[folder].'-'.$titleget.'/');
 						}
 
 						//metadata 폴더에 저장
-						$myfile = fopen("../metadata/titles/".$titleget."/titleid.txt", "w") or die("오류발생!");
+						$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/titleid.txt", "w") or die("오류발생!");
 						fwrite($myfile, '알 수 없음');
 						fclose($myfile);
 
-						$myfile = fopen("../metadata/titles/".$titleget."/title.txt", "w") or die("오류발생!");
+						$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/title.txt", "w") or die("오류발생!");
 						fwrite($myfile, $titleget);
 						fclose($myfile);
 
-						$myfile = fopen("../metadata/titles/".$titleget."/writer.txt", "w") or die("오류발생!");
+						$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/writer.txt", "w") or die("오류발생!");
 						fwrite($myfile, '알 수 없음');
 						fclose($myfile);
 
-						$myfile = fopen("../metadata/titles/".$titleget."/detail.txt", "w") or die("오류발생!");
+						$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/detail.txt", "w") or die("오류발생!");
 						fwrite($myfile, '메타데이터를 추출 할 수 없습니다.<br>/metadata/titles/'.$titleget.'/ 에서 메타데이터를 수정할 수 있습니다.');
 						fclose($myfile);
 
-						$myfile = fopen("../metadata/titles/".$titleget."/genre.txt", "w") or die("오류발생!");
+						$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/genre.txt", "w") or die("오류발생!");
 						fwrite($myfile, '알 수 없음');
 						fclose($myfile);
 
-						copy("df.png", "../metadata/titles/".$titleget."/thumb.jpg");
+						copy("df.png", "../metadata/titles/".$_GET['folder']."-".$titleget."/thumb.jpg");
 
 						$dir = "../metadata/titles/";
 						if (is_dir($dir)){
 							if ($dh = opendir($dir)){
 								while (($file = readdir($dh)) !== false){
 									if($file == "." || $file == "..") { continue; } else {
-										array_push($processed, $file);
+										array_push($processed, str_replace($_GET['folder']."-", "", $file));
 									}
 								}
 								closedir($dh);
 							}
 						}
 
-						$dir = "../".$basefolder."/";
+						$dir = "..".$basefolder;
 						if (is_dir($dir)){
 							if ($dh = opendir($dir)){
 								while (($file = readdir($dh)) !== false){
@@ -211,7 +212,7 @@ $titleget = $_GET['title'];
 						<br>Back : 알 수 없음
 						<br>BG : 알 수 없음
 						<script>history.pushState('', '', './metadata-creator.php');</script>
-						<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."'>";
+						<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
 					} else { //검색결과 발견
 						$processing = array();
 						$processed = array();
@@ -241,8 +242,8 @@ $titleget = $_GET['title'];
 						if($responseheader == true) { // 구글 캐시 있으면
 
 							$html = file_get_html('https://webcache.googleusercontent.com/search?q=cache:https://www.webtoonguide.com/ko/db/comic/'.$list[0]);
-							if (!is_dir('../metadata/titles/'.$titleget.'/')) {
-								mkdir('../metadata/titles/'.$titleget.'/');
+							if (!is_dir('../metadata/titles/'.$_GET[folder].'-'.$titleget.'/')) {
+								mkdir('../metadata/titles/'.$_GET[folder].'-'.$titleget.'/');
 							}
 							$title = str_replace(" ", "", html_entity_decode($html->find('div[class=content ko ellipsis-line-1]',0)->plaintext));
 							$writer = str_replace(" ", "", html_entity_decode($html->find('div[class=content ko ellipsis-line-1]',1)->plaintext));
@@ -268,41 +269,41 @@ $titleget = $_GET['title'];
 							}
 
 							//metadata 폴더에 저장
-							$myfile = fopen("../metadata/titles/".$titleget."/titleid.txt", "w") or die("오류발생!");
+							$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/titleid.txt", "w") or die("오류발생!");
 							fwrite($myfile, $list[0]);
 							fclose($myfile);
 
-							$myfile = fopen("../metadata/titles/".$titleget."/title.txt", "w") or die("오류발생!");
+							$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/title.txt", "w") or die("오류발생!");
 							fwrite($myfile, $title);
 							fclose($myfile);
 
-							$myfile = fopen("../metadata/titles/".$titleget."/writer.txt", "w") or die("오류발생!");
+							$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/writer.txt", "w") or die("오류발생!");
 							fwrite($myfile, $writer);
 							fclose($myfile);
 
-							$myfile = fopen("../metadata/titles/".$titleget."/detail.txt", "w") or die("오류발생!");
+							$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/detail.txt", "w") or die("오류발생!");
 							fwrite($myfile, $detail);
 							fclose($myfile);
 
-							$myfile = fopen("../metadata/titles/".$titleget."/genre.txt", "w") or die("오류발생!");
+							$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/genre.txt", "w") or die("오류발생!");
 							fwrite($myfile, $genreforfile);
 							fclose($myfile);
 
-							copy($thumb, "../metadata/titles/".$titleget."/thumb.jpg");
+							copy($thumb, "../metadata/titles/".$_GET['folder']."-".$titleget."/thumb.jpg");
 
 							$dir = "../metadata/titles/";
 							if (is_dir($dir)){
 								if ($dh = opendir($dir)){
 									while (($file = readdir($dh)) !== false){
 										if($file == "." || $file == "..") { continue; } else {
-											array_push($processed, $file);
+											array_push($processed, str_replace($_GET['folder']."-", "", $file));
 										}
 									}
 									closedir($dh);
 								}
 							}
 
-							$dir = "../".$basefolder."/";
+							$dir = "..".$basefolder;
 							if (is_dir($dir)){
 								if ($dh = opendir($dir)){
 									while (($file = readdir($dh)) !== false){
@@ -332,7 +333,7 @@ $titleget = $_GET['title'];
 							<br>
 							<br>해당 웹툰은 네이버 웹툰이 아닙니다. 결과가 부정확 할 수 있습니다.
 							<script>history.pushState('', '', './metadata-creator.php');</script>
-							<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."'>";
+							<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
 						} else {
 							$processing = array();
 							$processed = array();
@@ -346,46 +347,46 @@ $titleget = $_GET['title'];
 							if (!is_dir('../metadata/titles/')) {
 								mkdir('../metadata/titles/');
 							}
-							if (!is_dir('../metadata/titles/'.$titleget.'/')) {
-								mkdir('../metadata/titles/'.$titleget.'/');
+							if (!is_dir('../metadata/titles/'.$_GET[folder].'-'.$titleget.'/')) {
+								mkdir('../metadata/titles/'.$_GET[folder].'-'.$titleget.'/');
 							}
 
 							//metadata 폴더에 저장
-							$myfile = fopen("../metadata/titles/".$titleget."/titleid.txt", "w") or die("오류발생!");
+							$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/titleid.txt", "w") or die("오류발생!");
 							fwrite($myfile, '알 수 없음');
 							fclose($myfile);
 
-							$myfile = fopen("../metadata/titles/".$titleget."/title.txt", "w") or die("오류발생!");
+							$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/title.txt", "w") or die("오류발생!");
 							fwrite($myfile, $titleget);
 							fclose($myfile);
 
-							$myfile = fopen("../metadata/titles/".$titleget."/writer.txt", "w") or die("오류발생!");
+							$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/writer.txt", "w") or die("오류발생!");
 							fwrite($myfile, '알 수 없음');
 							fclose($myfile);
 
-							$myfile = fopen("../metadata/titles/".$titleget."/detail.txt", "w") or die("오류발생!");
+							$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/detail.txt", "w") or die("오류발생!");
 							fwrite($myfile, '메타데이터를 추출 할 수 없습니다.<br>/metadata/titles/'.$titleget.'/ 에서 메타데이터를 수정할 수 있습니다.');
 							fclose($myfile);
 
-							$myfile = fopen("../metadata/titles/".$titleget."/genre.txt", "w") or die("오류발생!");
+							$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/genre.txt", "w") or die("오류발생!");
 							fwrite($myfile, '알 수 없음');
 							fclose($myfile);
 
-							copy("df.png", "../metadata/titles/".$titleget."/thumb.jpg");
+							copy("df.png", "../metadata/titles/".$_GET['folder']."-".$titleget."/thumb.jpg");
 
 							$dir = "../metadata/titles/";
 							if (is_dir($dir)){
 								if ($dh = opendir($dir)){
 									while (($file = readdir($dh)) !== false){
 										if($file == "." || $file == "..") { continue; } else {
-											array_push($processed, $file);
+											array_push($processed, str_replace($_GET['folder']."-", "", $file));
 										}
 									}
 									closedir($dh);
 								}
 							}
 
-							$dir = "../".$basefolder."/";
+							$dir = "..".$basefolder;
 							if (is_dir($dir)){
 								if ($dh = opendir($dir)){
 									while (($file = readdir($dh)) !== false){
@@ -415,7 +416,7 @@ $titleget = $_GET['title'];
 							<br>
 							<br>메타데이터를 찾았으나, 구글 서버에 캐시되지 않아 가져올 수 없습니다.
 							<script>history.pushState('', '', './metadata-creator.php');</script>
-							<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."'>";
+							<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
 						}
 					}
 				} else {
@@ -429,8 +430,8 @@ $titleget = $_GET['title'];
 					if (!is_dir('../metadata/titles/')) {
 						mkdir('../metadata/titles/');
 					}
-					if (!is_dir('../metadata/titles/'.$titleget.'/')) {
-						mkdir('../metadata/titles/'.$titleget.'/');
+					if (!is_dir('../metadata/titles/'.$_GET[folder].'-'.$titleget.'/')) {
+						mkdir('../metadata/titles/'.$_GET[folder].'-'.$titleget.'/');
 					}
 
 					$data_str = file_get_contents('http://webtoon.daum.net/data/pc/webtoon/view/'.$list[0]);
@@ -463,26 +464,26 @@ $titleget = $_GET['title'];
 					$writer = $json[data][webtoon][cartoon][artists][0][name];
 					$thumb = $json[data][webtoon][pcRecommendImage][url];
 
-					copy($thumb, "../metadata/titles/".$titleget."/thumb.jpg");
+					copy($thumb, "../metadata/titles/".$_GET['folder']."-".$titleget."/thumb.jpg");
 
 					//metadata 폴더에 저장
-					$myfile = fopen("../metadata/titles/".$titleget."/titleid.txt", "w") or die("오류발생!");
+					$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/titleid.txt", "w") or die("오류발생!");
 					fwrite($myfile, $list[0]);
 					fclose($myfile);
 
-					$myfile = fopen("../metadata/titles/".$titleget."/title.txt", "w") or die("오류발생!");
+					$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/title.txt", "w") or die("오류발생!");
 					fwrite($myfile, $title);
 					fclose($myfile);
 
-					$myfile = fopen("../metadata/titles/".$titleget."/writer.txt", "w") or die("오류발생!");
+					$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/writer.txt", "w") or die("오류발생!");
 					fwrite($myfile, $writer);
 					fclose($myfile);
 
-					$myfile = fopen("../metadata/titles/".$titleget."/detail.txt", "w") or die("오류발생!");
+					$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/detail.txt", "w") or die("오류발생!");
 					fwrite($myfile, $detail);
 					fclose($myfile);
 
-					$myfile = fopen("../metadata/titles/".$titleget."/genre.txt", "w") or die("오류발생!");
+					$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/genre.txt", "w") or die("오류발생!");
 					fwrite($myfile, $genreforfile);
 					fclose($myfile);
 
@@ -494,14 +495,14 @@ $titleget = $_GET['title'];
 						if ($dh = opendir($dir)){
 							while (($file = readdir($dh)) !== false){
 								if($file == "." || $file == "..") { continue; } else {
-									array_push($processed, $file);
+									array_push($processed, str_replace($_GET['folder']."-", "", $file));
 								}
 							}
 							closedir($dh);
 						}
 					}
 
-					$dir = "../".$basefolder."/";
+					$dir = "..".$basefolder;
 					if (is_dir($dir)){
 						if ($dh = opendir($dir)){
 							while (($file = readdir($dh)) !== false){
@@ -532,7 +533,7 @@ $titleget = $_GET['title'];
 					<br>
 					<br>다음 웹툰에서 본 작품의 메타데이터를 찾았습니다.
 					<script>history.pushState('', '', './metadata-creator.php');</script>
-					<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."'>";
+					<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
 				}
       }
 
@@ -576,8 +577,8 @@ $titleget = $_GET['title'];
       if (!is_dir('../metadata/titles/')) {
         mkdir('../metadata/titles/');
       }
-      if (!is_dir('../metadata/titles/'.$titleget.'/')) {
-        mkdir('../metadata/titles/'.$titleget.'/');
+      if (!is_dir('../metadata/titles/'.$_GET[folder].'-'.$titleget.'/')) {
+        mkdir('../metadata/titles/'.$_GET[folder].'-'.$titleget.'/');
       }
 
       //섬네일
@@ -631,34 +632,34 @@ $baseurl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "
       imagecopy($dest_image, $process, 0, 0, 0, 0, WIDTH, HEIGHT);
       sleep(1);
 
-    imagepng($dest_image, "../metadata/titles/".$titleget."/thumb.jpg");
+    imagepng($dest_image, "../metadata/titles/".$_GET['folder']."-".$titleget."/thumb.jpg");
     imagedestroy($dest_image);
     imagedestroy($process);
           //이미지 빈파일 제거.
-    if (filesize("../metadata/titles/".$titleget."/thumb.jpg") <= 2000) { // 서버마다 생성되는 빈 파일의 용량이 다른데 대충 1000~2000인듯.
-      unlink("../metadata/titles/".$titleget."/thumb.jpg");
-      copy($thumb, "../metadata/titles/".$titleget."/thumb.jpg");
+    if (filesize("../metadata/titles/".$_GET['folder']."-".$titleget."/thumb.jpg") <= 2000) { // 서버마다 생성되는 빈 파일의 용량이 다른데 대충 1000~2000인듯.
+      unlink("../metadata/titles/".$_GET['folder']."-".$titleget."/thumb.jpg");
+      copy($thumb, "../metadata/titles/".$_GET['folder']."-".$titleget."/thumb.jpg");
       $gqthumbox = "0";
     }
 
 //metadata 폴더에 저장
-$myfile = fopen("../metadata/titles/".$titleget."/titleid.txt", "w") or die("오류발생!");
+$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/titleid.txt", "w") or die("오류발생!");
 fwrite($myfile, $titleid);
 fclose($myfile);
 
-$myfile = fopen("../metadata/titles/".$titleget."/title.txt", "w") or die("오류발생!");
+$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/title.txt", "w") or die("오류발생!");
 fwrite($myfile, $title);
 fclose($myfile);
 
-$myfile = fopen("../metadata/titles/".$titleget."/writer.txt", "w") or die("오류발생!");
+$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/writer.txt", "w") or die("오류발생!");
 fwrite($myfile, $writer);
 fclose($myfile);
 
-$myfile = fopen("../metadata/titles/".$titleget."/detail.txt", "w") or die("오류발생!");
+$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/detail.txt", "w") or die("오류발생!");
 fwrite($myfile, $detail);
 fclose($myfile);
 
-$myfile = fopen("../metadata/titles/".$titleget."/genre.txt", "w") or die("오류발생!");
+$myfile = fopen("../metadata/titles/".$_GET['folder']."-".$titleget."/genre.txt", "w") or die("오류발생!");
 fwrite($myfile, $genreforfile);
 fclose($myfile);
 
@@ -679,14 +680,14 @@ if (is_dir($dir)){
   if ($dh = opendir($dir)){
     while (($file = readdir($dh)) !== false){
       if($file == "." || $file == "..") { continue; } else {
-        array_push($processed, $file);
+        array_push($processed, str_replace($_GET['folder']."-", "", $file));
       }
     }
     closedir($dh);
   }
 }
 
-$dir = "../".$basefolder."/";
+$dir = "..".$basefolder;
 if (is_dir($dir)){
   if ($dh = opendir($dir)){
     while (($file = readdir($dh)) !== false){
@@ -718,5 +719,5 @@ echo "
 <br>Back : $imgcreatebackurl
 <br>BG : $imgcreatebgurl
 <script>history.pushState('', '', './metadata-creator.php');</script>
-<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."'>";
+<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
  ?>

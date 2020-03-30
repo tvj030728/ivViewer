@@ -77,14 +77,14 @@ if (!isset($_COOKIE[$logindatapass])) {
 	<div class="grid">
 
 		<?php
-		$files = array();
 
-		$dir = "./data/naver/";
+		$filess = array();
+		$dir = "./data/";
 		if (is_dir($dir)){
 			if ($dh = opendir($dir)){
 				while (($file = readdir($dh)) !== false){
 					if($file == "." || $file == "..") { continue; } else {
-						array_push($files, $file);
+						array_push($filess, $file);
 					}
 				}
 				closedir($dh);
@@ -92,15 +92,31 @@ if (!isset($_COOKIE[$logindatapass])) {
 		}
 
 
+		$files = array();
+		foreach($filess as $filesss) {
+			$dir = "./data/".$filesss."/";
+			if (is_dir($dir)){
+				if ($dh = opendir($dir)){
+					while (($file = readdir($dh)) !== false){
+						if($file == "." || $file == "..") { continue; } else {
+							array_push($files, array($file, $filesss));
+						}
+					}
+					closedir($dh);
+				}
+			}
+		}
+
+
 		sort($files);
 
 		foreach ($files as $file) {
-			if (!file_exists("./metadata/titles/$file/titleid.txt")) {
+			if (!file_exists("./metadata/titles/$file[1]-$file[0]/titleid.txt")) {
 				?>
-				<a href="./manga_info.php?title=<?php echo $file; ?>" class="item">
+				<a title="<?php echo $file[1]; ?>/<?php echo $file[0]; ?>" href="./manga_info.php?title=<?php echo $file[0]; ?>&folder=<?php echo $file[1]; ?>" class="item">
 					<div class="card">
 						<div class="card-header text-center">
-							<div class="item-name"><?php echo $file; ?></div>
+							<div class="item-name"><?php echo $file[0]; ?></div>
 							<div class="item-category">메타데이터가 등록되지 않음</div>
 						</div>
 						<img class="card-img-bottom lazy" data-original="./system/dthumb.png">
@@ -109,13 +125,13 @@ if (!isset($_COOKIE[$logindatapass])) {
 				<?php
 			} else {
 				?>
-				<a href="./manga_info.php?title=<?php echo $file; ?>#id=<?php $fp = fopen("./metadata/titles/$file/titleid.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/titleid.txt")); fclose($fp); echo $fr; ?>" class="<?php $fp = fopen("./metadata/titles/$file/genre.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/genre.txt")); fclose($fp); echo $fr; ?> item">
+				<a title="<?php echo $file[1]; ?>/<?php echo $file[0]; ?>" href="./manga_info.php?title=<?php echo $file[0]; ?>&folder=<?php echo $file[1]; ?>#id=<?php $fp = fopen("./metadata/titles/$file[1]-$file[0]/titleid.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file[1]-$file[0]/titleid.txt")); fclose($fp); echo $fr; ?>" class="<?php $fp = fopen("./metadata/titles/$file[1]-$file[0]/genre.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file[1]-$file[0]/genre.txt")); fclose($fp); echo $fr; ?> item">
 					<div class="card">
 						<div class="card-header text-center">
-							<div class="item-name"><?php echo $file; ?></div>
-							<div class="item-category"><?php $fp = fopen("./metadata/titles/$file/writer.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/writer.txt")); fclose($fp); echo $fr; ?></div>
+							<div class="item-name"><?php echo $file[0]; ?></div>
+							<div class="item-category"><?php $fp = fopen("./metadata/titles/$file[1]-$file[0]/writer.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file[1]-$file[0]/writer.txt")); fclose($fp); echo $fr; ?></div>
 						</div>
-						<img class="card-img-bottom lazy" data-original="./metadata/titles/<?php echo str_replace("+", "%20", urlencode($file)); ?>/thumb.jpg">
+						<img class="card-img-bottom lazy" data-original="./metadata/titles/<?php echo str_replace("+", "%20", urlencode($file[1].'-'.$file[0])); ?>/thumb.jpg">
 					</div>
 				</a>
 				<?php
@@ -129,7 +145,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 <footer class="footer w-100">
 	<hr class="mt-5 mb-4">
 	<div class="text-center my-5 footer-bottom">
-		<p><span style="cursor:pointer;" onclick="location.replace('./system/metadata-creator.php')">메타데이터 등록</span>  |  <span style="cursor:pointer;" onclick="location.replace('./login/change.php')">계정정보 변경</span>  |  <span style="cursor:pointer;" onclick="location.replace('login_ok.php?action=logout')">로그아웃</span></p>
+		<p><span style="cursor:pointer;" onclick="location.replace('./system/metadata.php?action=start')">메타데이터 등록</span>  |  <span style="cursor:pointer;" onclick="location.replace('./login/change.php')">계정정보 변경</span>  |  <span style="cursor:pointer;" onclick="location.replace('login_ok.php?action=logout')">로그아웃</span></p>
 
 		<p><a href="https://ivlis.kr">ivViewer</a>. Developed by <a href="https://ivlis.kr">ivLis.kr</a></p>
 	</div>

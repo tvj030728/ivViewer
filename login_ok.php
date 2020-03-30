@@ -16,7 +16,6 @@ if (!isset($_POST[pass])) {
 
 if (!is_dir('./data/')) {
   mkdir('./data/');
-  mkdir('./data/naver/');
 }
 
 if (file_exists('config.json')) {

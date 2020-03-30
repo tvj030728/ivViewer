@@ -17,7 +17,7 @@ if (!is_dir('./data/temp/')) {
 	mkdir('./data/temp/');
 }
 
-$basefolder = "data/naver/";
+$basefolder = "data/".$_GET['folder']."/";
 
 $randcode = rand(1,20);
 
@@ -168,13 +168,13 @@ if($type == "zip"){
          if ($now == '0') {
          $pree = "<li class='empty' id='previous-episodeclass=empty'>< <strong><span>이전화</span></strong></li>";
          } else {
-         $pree = "<li style='cursor:pointer;' OnClick=\"location.replace('./viewer.php?title=".urlencode($_GET['title'])."&episode=".urlencode($episodeselect[$pre])."')\">< <strong><span title='이전화'>이전화</span></strong></li>";
+         $pree = "<li style='cursor:pointer;' OnClick=\"location.replace('./viewer.php?title=".urlencode($_GET['title'])."&episode=".urlencode($episodeselect[$pre])."&folder=".$_GET['folder']."')\">< <strong><span title='이전화'>이전화</span></strong></li>";
          }
 
          if (count($episodeselect) == $next) {
          $nexte = "<li class='empty' id='next-episodeclass=empty'><strong><span>다음화</span></strong> ></li>";
          } else {
-         $nexte = "<li style='cursor:pointer;' OnClick=\"location.replace('./viewer.php?title=".urlencode($_GET['title'])."&episode=".urlencode($episodeselect[$next])."')\"><strong><span title='다음화'>다음화</span></strong> ></li>";
+         $nexte = "<li style='cursor:pointer;' OnClick=\"location.replace('./viewer.php?title=".urlencode($_GET['title'])."&episode=".urlencode($episodeselect[$next])."&folder=".$_GET['folder']."')\"><strong><span title='다음화'>다음화</span></strong> ></li>";
          }
          ?>
 			 <?php if (count($episodeselect) != $next): ?>
@@ -193,7 +193,7 @@ if($type == "zip"){
          			if(<?php echo count($episodeselect); ?> == <?php echo $next; ?>) {
          			alert('다음화가 없습니다!');
          			} else {
-         			location.replace("./viewer.php?title=<?php echo urlencode($_GET['title']);?>&episode=<?php echo urlencode($episodeselect[$next]);?>");
+         			location.replace("./viewer.php?title=<?php echo urlencode($_GET['title']);?>&episode=<?php echo urlencode($episodeselect[$next]);?>&folder=<?php echo $_GET['folder'];?>");
          			}
          		}
          	}
@@ -210,7 +210,7 @@ if($type == "zip"){
                   }
                   ?>
                <li OnClick="location.replace('./index.php')" style='cursor:pointer;'><span title='메인'><i class="fas fa-home"></i></span></li>
-               <li OnClick="location.replace('./manga_info.php?title=<?php echo $_GET['title']; ?>#id=<?php $fp = fopen("./metadata/titles/$file/titleid.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/titleid.txt")); fclose($fp); echo $fr; ?>')" style='cursor:pointer;'><span title='<?php echo $_GET['title']; ?> 회차 목록'><i class="fas fa-bars"></i></span></li>
+               <li OnClick="location.replace('./manga_info.php?title=<?php echo $_GET['title']; ?>&folder=<?php echo $_GET['folder']; ?>#id=<?php $fp = fopen("./metadata/titles/$file/titleid.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file/titleid.txt")); fclose($fp); echo $fr; ?>')" style='cursor:pointer;'><span title='<?php echo $_GET['title']; ?> 회차 목록'><i class="fas fa-bars"></i></span></li>
                <?php echo $pree;?>
                <?php echo $nexte;?>
             </ul>

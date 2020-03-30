@@ -12,9 +12,6 @@ if (!isset($_COOKIE[$logindatapass])) {
 	header("Location: ./login/");
 }
 
-$basefolder = "/data/naver/";
-
-
 $mAgent = array("iPhone","iPod","Android","Blackberry",
     "Opera Mini", "Windows ce", "Nokia", "sony" );
 $chkMobile = false;
@@ -46,14 +43,14 @@ for($i=0; $i<sizeof($mAgent); $i++){
 		</div>
 		<div class="header-content position-relative" style="margin-top: 50px;">
 			<div class="container">
-				<img src="./metadata/titles/<?php echo str_replace("+", "%20", urlencode($_GET['title'])); ?>/thumb.jpg" style="border-radius: <?php if($chkMobile) {echo '1';} else {echo '1';} ?>%;" <?php if($chkMobile) {echo "width='100%'";} ?>>
+				<img src="./metadata/titles/<?php echo $_GET['folder']; ?>-<?php echo str_replace("+", "%20", urlencode($_GET['title'])); ?>/thumb.jpg" style="border-radius: <?php if($chkMobile) {echo '1';} else {echo '1';} ?>%;" <?php if($chkMobile) {echo "width='100%'";} ?>>
 				<br><br>
 				<h1 class="site-name display-2 text-white font-weight-bold"><?php echo $_GET['title']; ?></h1>
-				<h2 class="header-title text-white"><?php $fp = fopen("./metadata/titles/".$_GET['title']."/writer.txt","r"); $fr = fread($fp, filesize("./metadata/titles/".$_GET['title']."/writer.txt")); fclose($fp); echo $fr; ?></h2>
+				<h2 class="header-title text-white"><?php $fp = fopen("./metadata/titles/".$_GET['folder']."-".$_GET['title']."/writer.txt","r"); $fr = fread($fp, filesize("./metadata/titles/".$_GET['folder']."-".$_GET['title']."/writer.txt")); fclose($fp); echo $fr; ?></h2>
 				<?php if($chkMobile) {} else {echo "<br>";} ?>
-				<h5 class="header-sub-title mt-2">#<?php $fp = fopen("./metadata/titles/".$_GET['title']."/genre.txt","r"); $fr = fread($fp, filesize("./metadata/titles/".$_GET['title']."/genre.txt")); fclose($fp); echo str_replace(" ", " #", $fr); ?></h5>
+				<h5 class="header-sub-title mt-2">#<?php $fp = fopen("./metadata/titles/".$_GET['folder']."-".$_GET['title']."/genre.txt","r"); $fr = fread($fp, filesize("./metadata/titles/".$_GET['folder']."-".$_GET['title']."/genre.txt")); fclose($fp); echo str_replace(" ", " #", $fr); ?></h5>
 				<?php if($chkMobile) {} else {echo "<br>";} ?>
-				<h5 class="header-sub-title mt-2"><?php $fp = fopen("./metadata/titles/".$_GET['title']."/detail.txt","r"); $fr = fread($fp, filesize("./metadata/titles/".$_GET['title']."/detail.txt")); fclose($fp); echo $fr; ?></h5>
+				<h5 class="header-sub-title mt-2"><?php $fp = fopen("./metadata/titles/".$_GET['folder']."-".$_GET['title']."/detail.txt","r"); $fr = fread($fp, filesize("./metadata/titles/".$_GET['folder']."-".$_GET['title']."/detail.txt")); fclose($fp); echo $fr; ?></h5>
 			</div>
 		</div>
 	</div>
@@ -63,7 +60,7 @@ for($i=0; $i<sizeof($mAgent); $i++){
 	<div class="grid">
 
 		<?php
-		$dir = "./".$basefolder."/".$_GET['title']."/";
+		$dir = "./data/".$_GET['folder']."/".$_GET['title']."/";
 		$files = array();
 		if (is_dir($dir)){
 			if ($dh = opendir($dir)){
@@ -92,7 +89,7 @@ for($i=0; $i<sizeof($mAgent); $i++){
 			}
 			$put = str_replace($_GET['title']." ", "", $put2);;
 			?>
-			<a href="./viewer.php?title=<?php echo urlencode($_GET['title']); ?>&episode=<?php echo urlencode($originput); ?>" class="item">
+			<a href="./viewer.php?title=<?php echo urlencode($_GET['title']); ?>&episode=<?php echo urlencode($originput); ?>&folder=<?php echo $_GET[folder]; ?>" class="item">
 				<div class="card">
 					<div class="card-header text-center">
 						<div class="item-name"><?php echo str_replace(".zip", "", str_replace(".png", "", $put)); ?></div>
