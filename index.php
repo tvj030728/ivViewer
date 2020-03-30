@@ -180,7 +180,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 <script>
 $("img.lazy").lazyload({
  effect : "fadeIn",
- threshold : 20000
+ threshold : 200000
 });
 
 $(document).ready(function () {
