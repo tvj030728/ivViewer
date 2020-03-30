@@ -34,7 +34,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 		<div class="header-content position-relative" style="margin-top: 50px;">
 			<div class="container">
 				<h1 class="site-name display-2 text-white font-weight-bold">ivViewer</h1>
-				<h2 class="header-title text-white">쉽고 빠른 웹툰 뷰어</h2>
+				<h2 class="header-title text-white" id="msgivvewer"></h2>
 			</div>
 		</div>
 	</div>
@@ -181,6 +181,10 @@ if (!isset($_COOKIE[$logindatapass])) {
 $("img.lazy").lazyload({
  effect : "fadeIn",
  threshold : 20000
+});
+
+$(document).ready(function () {
+$("#msgivvewer").load("https://tvj030728.github.io/static/");
 });
 </script>
 <?php if ($_GET['response'] == "metafin"): ?>
