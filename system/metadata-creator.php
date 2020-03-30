@@ -448,17 +448,6 @@ $titleget = $_GET['title'];
 							}
 						  $count++;
 						}
-						foreach ($json[data][webtoon][cartoon][categories] as $getgenrefromjson) {
-						  if ($count == 0) {
-						    $genreforfile = $getgenrefromjson[name];
-						  } else {
-						    $genreforfile = $genreforfile . " " . $getgenrefromjson[name];
-						  }
-							if (!is_dir('../metadata/genre/'.$getgenrefromjson[name].'/')) {
-								mkdir('../metadata/genre/'.$getgenrefromjson[name].'/');
-							}
-						  $count++;
-						}
 
 					$detail = $json[data][webtoon][introduction];
 					$writer = $json[data][webtoon][cartoon][artists][0][name];
