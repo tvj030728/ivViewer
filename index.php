@@ -53,7 +53,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 							if($file == "." || $file == ".." || $file == "temp") { continue; } else {
 								?>
 								<li class="nav-item">
-									<a href="#" class="nav-link" data-filter=".<?php echo $file; ?>"><?php echo $file; ?></a>
+									<a href="#" class="nav-link" data-filter=".<?php echo $file; ?>">[<?php echo $file; ?>]</a>
 								</li>
 								<?php
 							}
@@ -61,7 +61,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 						closedir($dh);
 					}
 				}
-				
+
 				$dir = "./metadata/genre/";
 
 				if (is_dir($dir)){
