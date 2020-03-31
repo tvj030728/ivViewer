@@ -45,7 +45,7 @@ if (!isset($_COOKIE[$logindatapass])) {
       <a href="setting-up.php?action=data" class="item">
         <div class="card">
           <div class="card-header text-center">
-            <div class="item-name">데이터 기반으로 로드</div>
+            <div class="item-name">메타데이터 기반 로드 (활성화됨)</div>
           </div>
         </div>
       </a>
@@ -53,7 +53,7 @@ if (!isset($_COOKIE[$logindatapass])) {
       <a href="setting-up.php?action=meta" class="item">
         <div class="card">
           <div class="card-header text-center">
-            <div class="item-name">메타 기반으로 로드</div>
+            <div class="item-name">메타데이터 기반 로드 (비활성화됨)</div>
           </div>
         </div>
       </a>
@@ -63,7 +63,7 @@ if (!isset($_COOKIE[$logindatapass])) {
       <a href="setting-up.php?action=img" class="item">
         <div class="card">
           <div class="card-header text-center">
-            <div class="item-name">이미지로드</div>
+            <div class="item-name">이미지로드 (비활성화됨)</div>
           </div>
         </div>
       </a>
@@ -71,7 +71,7 @@ if (!isset($_COOKIE[$logindatapass])) {
       <a href="setting-up.php?action=noimg" class="item">
         <div class="card">
           <div class="card-header text-center">
-            <div class="item-name">이미지 로드하지 않음</div>
+            <div class="item-name">이미지로드 (활성화됨)</div>
           </div>
         </div>
       </a>
