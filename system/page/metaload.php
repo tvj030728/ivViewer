@@ -76,8 +76,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 					}
 				}
 				sort($files);
-				array_unique($mftfolderload);
-				foreach($mftfolderload as $mftfolder){
+				foreach(array_unique($mftfolderload) as $mftfolder){
 				?>
 				<li class="nav-item">
 					<a href="#" class="nav-link" data-filter=".<?php echo $mftfolder; ?>">[<?php echo $mftfolder; ?>]</a>
