@@ -212,7 +212,7 @@ $titleget = $_GET['title'];
 						<br>Back : 알 수 없음
 						<br>BG : 알 수 없음
 						<script>history.pushState('', '', './metadata-creator.php');</script>
-						<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
+						<meta http-equiv='refresh' content='0;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
 					} else { //검색결과 발견
 						$processing = array();
 						$processed = array();
@@ -333,7 +333,7 @@ $titleget = $_GET['title'];
 							<br>
 							<br>해당 웹툰은 네이버 웹툰이 아닙니다. 결과가 부정확 할 수 있습니다.
 							<script>history.pushState('', '', './metadata-creator.php');</script>
-							<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
+							<meta http-equiv='refresh' content='0;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
 						} else {
 							$processing = array();
 							$processed = array();
@@ -416,7 +416,7 @@ $titleget = $_GET['title'];
 							<br>
 							<br>메타데이터를 찾았으나, 구글 서버에 캐시되지 않아 가져올 수 없습니다.
 							<script>history.pushState('', '', './metadata-creator.php');</script>
-							<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
+							<meta http-equiv='refresh' content='0;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
 						}
 					}
 				} else {
@@ -522,7 +522,7 @@ $titleget = $_GET['title'];
 					<br>
 					<br>다음 웹툰에서 본 작품의 메타데이터를 찾았습니다.
 					<script>history.pushState('', '', './metadata-creator.php');</script>
-					<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
+					<meta http-equiv='refresh' content='0;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
 				}
       }
 
@@ -708,5 +708,5 @@ echo "
 <br>Back : $imgcreatebackurl
 <br>BG : $imgcreatebgurl
 <script>history.pushState('', '', './metadata-creator.php');</script>
-<meta http-equiv='refresh' content='1;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
+<meta http-equiv='refresh' content='0;url=./metadata-creator.php?title=".$result[0]."&folder=".$_GET['folder']."'>";
  ?>
