@@ -42,7 +42,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 	<div class="container-fluid content py-4 clearfix">
 	<div class="grid">
     <?php if (is_dir("./system/setting/metaload")): ?>
-      <a href="setting-up.php?action=data" class="item">
+      <a href="./system/setting-up.php?action=data" class="item">
         <div class="card">
           <div class="card-header text-center">
             <div class="item-name">메타데이터 기반 로드 (활성화됨)</div>
@@ -50,7 +50,7 @@ if (!isset($_COOKIE[$logindatapass])) {
         </div>
       </a>
     <?php else: ?>
-      <a href="setting-up.php?action=meta" class="item">
+      <a href="./system/setting-up.php?action=meta" class="item">
         <div class="card">
           <div class="card-header text-center">
             <div class="item-name">메타데이터 기반 로드 (비활성화됨)</div>
@@ -60,7 +60,7 @@ if (!isset($_COOKIE[$logindatapass])) {
     <?php endif; ?>
 
     <?php if (is_dir("./system/setting/noimg")): ?>
-      <a href="setting-up.php?action=img" class="item">
+      <a href="./system/setting-up.php?action=img" class="item">
         <div class="card">
           <div class="card-header text-center">
             <div class="item-name">이미지로드 (비활성화됨)</div>
@@ -68,7 +68,7 @@ if (!isset($_COOKIE[$logindatapass])) {
         </div>
       </a>
     <?php else: ?>
-      <a href="setting-up.php?action=noimg" class="item">
+      <a href="./system/setting-up.php?action=noimg" class="item">
         <div class="card">
           <div class="card-header text-center">
             <div class="item-name">이미지로드 (활성화됨)</div>
