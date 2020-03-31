@@ -47,10 +47,12 @@ if (!isset($_COOKIE[$logindatapass])) {
 				</li>
 				<?php
 				$dir = "./data/";
+				$filess = array();
 				if (is_dir($dir)){
 					if ($dh = opendir($dir)){
 						while (($file = readdir($dh)) !== false){
 							if($file == "." || $file == ".." || $file == "temp") { continue; } else {
+								array_push($filess, $file);
 								?>
 								<li class="nav-item">
 									<a href="#" class="nav-link" data-filter=".<?php echo $file; ?>">[<?php echo $file; ?>]</a>
@@ -93,20 +95,6 @@ if (!isset($_COOKIE[$logindatapass])) {
 	<div class="grid">
 
 		<?php
-
-		$filess = array();
-		$dir = "./data/";
-		if (is_dir($dir)){
-			if ($dh = opendir($dir)){
-				while (($file = readdir($dh)) !== false){
-					if($file == "." || $file == ".." || $file == "temp") { continue; } else {
-						array_push($filess, $file);
-					}
-				}
-				closedir($dh);
-			}
-		}
-
 
 		$files = array();
 		foreach($filess as $filesss) {
