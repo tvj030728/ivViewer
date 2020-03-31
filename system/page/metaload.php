@@ -69,17 +69,21 @@ if (!isset($_COOKIE[$logindatapass])) {
 									}
 								}
 								array_push($files, array($mftname, $mftfolder));
-								?>
-								<li class="nav-item">
-									<a href="#" class="nav-link" data-filter=".<?php echo $mftfolder; ?>">[<?php echo $mftfolder; ?>]</a>
-								</li>
-								<?php
+								$mftfolderload[] = $mftfolder;
 							}
 						}
 						closedir($dh);
 					}
 				}
 				sort($files);
+				array_unique($mftfolderload);
+				foreach($mftfolderload as $mftfolder){
+				?>
+				<li class="nav-item">
+					<a href="#" class="nav-link" data-filter=".<?php echo $mftfolder; ?>">[<?php echo $mftfolder; ?>]</a>
+				</li>
+				<?php
+			}
 
 				$dir = "./metadata/genre/";
 
