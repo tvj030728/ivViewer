@@ -41,13 +41,23 @@ if (!isset($_COOKIE[$logindatapass])) {
 
 	<div class="container-fluid content py-4 clearfix">
 	<div class="grid">
-			<a href="테스트" class="item">
-				<div class="card">
-					<div class="card-header text-center">
-						<div class="item-name">테스트</div>
-					</div>
-				</div>
-			</a>
+    <?php if (is_dir("./system/setting/metaload")): ?>
+      <a href="setting-up.php?action=data" class="item">
+        <div class="card">
+          <div class="card-header text-center">
+            <div class="item-name">데이터 기반으로 로드</div>
+          </div>
+        </div>
+      </a>
+    <?php else: ?>
+      <a href="setting-up.php?action=meta" class="item">
+        <div class="card">
+          <div class="card-header text-center">
+            <div class="item-name">메타 기반으로 로드</div>
+          </div>
+        </div>
+      </a>
+    <?php endif; ?>
 	</div>
 
 </div>
