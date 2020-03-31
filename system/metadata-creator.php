@@ -13,6 +13,10 @@ if (!isset($_COOKIE[$logindatapass])) {
 	header("Location: ../login/");
 }
 
+if (!isset($_GET['folder'])) {
+	die("옳바르지 않은 피라미터");
+}
+
 /*
 
 네이버 웹툰 메타데이터 긁어오기.
