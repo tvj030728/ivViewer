@@ -60,7 +60,7 @@ if (!isset($_COOKIE[$logindatapass])) {
     <?php endif; ?>
 
     <?php if (is_dir("./system/setting/img")): ?>
-      <a href="setting-up.php?action=data" class="item">
+      <a href="setting-up.php?action=img" class="item">
         <div class="card">
           <div class="card-header text-center">
             <div class="item-name">이미지로드</div>
