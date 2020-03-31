@@ -24,7 +24,7 @@ if ($_GET['action'] == 'img') {
   rmdir("./system/setting/noimg");
   header("Location: ".$_SERVER['HTTP_REFERER']);
 }
-if ($_GET['action'] == 'meta') {
+if ($_GET['action'] == 'noimg') {
   mkdir("./system/setting/noimg");
   header("Location: ".$_SERVER['HTTP_REFERER']);
 }

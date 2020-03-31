@@ -59,7 +59,7 @@ if (!isset($_COOKIE[$logindatapass])) {
       </a>
     <?php endif; ?>
 
-    <?php if (is_dir("./system/setting/noimg")): ?>
+    <?php if (is_dir("./system/setting/img")): ?>
       <a href="setting-up.php?action=data" class="item">
         <div class="card">
           <div class="card-header text-center">
@@ -68,7 +68,7 @@ if (!isset($_COOKIE[$logindatapass])) {
         </div>
       </a>
     <?php else: ?>
-      <a href="setting-up.php?action=meta" class="item">
+      <a href="setting-up.php?action=noimg" class="item">
         <div class="card">
           <div class="card-header text-center">
             <div class="item-name">이미지 로드하지 않음</div>
