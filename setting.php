@@ -59,7 +59,7 @@ if (!isset($_COOKIE[$logindatapass])) {
       </a>
     <?php endif; ?>
 
-    <?php if (is_dir("./system/setting/img")): ?>
+    <?php if (is_dir("./system/setting/noimg")): ?>
       <a href="setting-up.php?action=img" class="item">
         <div class="card">
           <div class="card-header text-center">
