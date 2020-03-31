@@ -71,7 +71,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 								array_push($files, array($mftname, $mftfolder));
 								?>
 								<li class="nav-item">
-									<a href="#" class="nav-link" data-filter=".<?php echo $mftname; ?>">[<?php echo $mftname; ?>]</a>
+									<a href="#" class="nav-link" data-filter=".<?php echo $mftfolder; ?>">[<?php echo $mftfolder; ?>]</a>
 								</li>
 								<?php
 							}
