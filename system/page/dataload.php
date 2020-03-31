@@ -123,7 +123,9 @@ if (!isset($_COOKIE[$logindatapass])) {
 							<div class="item-name"><?php echo $file[0]; ?></div>
 							<div class="item-category">메타데이터가 등록되지 않음</div>
 						</div>
-						<img class="card-img-bottom lazy" data-original="./system/dthumb.png">
+						<?php if (!is_dir("./system/setting/noimg")): ?>
+							<img class="card-img-bottom lazy" data-original="./system/dthumb.png" />
+						<?php endif; ?>
 					</div>
 				</a>
 				<?php
@@ -135,7 +137,9 @@ if (!isset($_COOKIE[$logindatapass])) {
 							<div class="item-name"><?php echo $file[0]; ?></div>
 							<div class="item-category"><?php $fp = fopen("./metadata/titles/$file[1]-$file[0]/writer.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file[1]-$file[0]/writer.txt")); fclose($fp); echo $fr; ?></div>
 						</div>
-						<img class="card-img-bottom lazy" data-original="./metadata/titles/<?php echo str_replace("+", "%20", urlencode($file[1].'-'.$file[0])); ?>/thumb.jpg">
+						<?php if (!is_dir("./system/setting/noimg")): ?>
+							<img class="card-img-bottom lazy" data-original="./metadata/titles/<?php echo str_replace("+", "%20", urlencode($file[1].'-'.$file[0])); ?>/thumb.jpg">
+						<?php endif; ?>
 					</div>
 				</a>
 				<?php
