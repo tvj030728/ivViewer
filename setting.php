@@ -33,8 +33,6 @@ if (!isset($_COOKIE[$logindatapass])) {
 		</div>
 		<div class="header-content position-relative" style="margin-top: 50px;">
 			<div class="container">
-				<img src="./metadata/titles/<?php echo $_GET['folder']; ?>-<?php echo str_replace("+", "%20", urlencode($_GET['title'])); ?>/thumb.jpg" style="border-radius: <?php if($chkMobile) {echo '1';} else {echo '1';} ?>%;" <?php if($chkMobile) {echo "width='100%'";} ?>>
-				<br><br>
 				<h1 class="site-name display-2 text-white font-weight-bold">설정페이지</h1>
 			</div>
 		</div>
