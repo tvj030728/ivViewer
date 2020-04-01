@@ -35,16 +35,35 @@ if (!isset($_COOKIE[$logindatapass])) {
 			<div class="container">
 				<h1 class="site-name display-2 text-white font-weight-bold">ivViewer</h1>
 				<h2 class="header-title text-white" id="msgivvewer"></h2>
+				<?php
+				if (file_exists("./system/addon/lookedrecent.php")) {
+					include("./system/addon/lookedrecent.php");
+				}
+				 ?>
 			</div>
 		</div>
 	</div>
 
 	<div class="container-fluid content py-4 clearfix">
+		<?php
+		if (file_exists("./system/addon/searchform.php")) {
+			include("./system/addon/searchform.php");
+		}
+		 ?>
 		<nav class="navbar navbar-light navbar-expand bg-light mb-4 p-2 rounded">
 			<ul class="navbar-nav">
 				<li class="nav-item ">
 					<a href="#" class="nav-link active" data-filter="*">전체보기</a>
 				</li>
+				<?php
+				if (is_dir("./system/addon/dump/like/")) {
+					?>
+					<li class="nav-item ">
+						<a href="#" class="nav-link" data-filter=".즐겨찾기">즐겨찾기</a>
+					</li>
+					<?php
+				}
+				 ?>
 				<?php
 				$files = array();
 				$dir = "./metadata/titles/";
@@ -117,34 +136,38 @@ if (!isset($_COOKIE[$logindatapass])) {
 		<?php
 
 		foreach ($files as $file) {
-			if (!file_exists("./metadata/titles/$file[1]-$file[0]/titleid.txt")) {
-				?>
-				<a title="<?php echo $file[1]; ?>/<?php echo $file[0]; ?>" href="./manga_info.php?title=<?php echo $file[0]; ?>&folder=<?php echo $file[1]; ?>" class="<?php echo $file[1]; ?> item">
-					<div class="card">
-						<div class="card-header text-center">
-							<div class="item-name"><?php echo $file[0]; ?></div>
-							<div class="item-category">메타데이터가 등록되지 않음</div>
-						</div>
-						<?php if (!is_dir("./system/setting/noimg")): ?>
-							<img class="card-img-bottom lazy" data-original="./system/dthumb.png" />
-						<?php endif; ?>
-					</div>
-				</a>
-				<?php
+			if (file_exists("./system/addon/search.php")) {
+				include("./system/addon/search.php");
 			} else {
-				?>
-				<a title="<?php echo $file[1]; ?>/<?php echo $file[0]; ?>" href="./manga_info.php?title=<?php echo $file[0]; ?>&folder=<?php echo $file[1]; ?>#id=<?php $fp = fopen("./metadata/titles/$file[1]-$file[0]/titleid.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file[1]-$file[0]/titleid.txt")); fclose($fp); echo $fr; ?>" class="<?php $fp = fopen("./metadata/titles/$file[1]-$file[0]/genre.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file[1]-$file[0]/genre.txt")); fclose($fp); echo $fr; ?> <?php echo $file[1]; ?> item">
-					<div class="card">
-						<div class="card-header text-center">
-							<div class="item-name"><?php echo $file[0]; ?></div>
-							<div class="item-category"><?php $fp = fopen("./metadata/titles/$file[1]-$file[0]/writer.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file[1]-$file[0]/writer.txt")); fclose($fp); echo $fr; ?></div>
-						</div>
-						<?php if (!is_dir("./system/setting/noimg")): ?>
-							<img class="card-img-bottom lazy" data-original="./metadata/titles/<?php echo str_replace("+", "%20", urlencode($file[1].'-'.$file[0])); ?>/thumb.jpg">
-						<?php endif; ?>
-					</div>
-				</a>
-				<?php
+				if (!file_exists("./metadata/titles/$file[1]-$file[0]/titleid.txt")) {
+			    ?>
+			    <a title="<?php echo $file[1]; ?>/<?php echo $file[0]; ?>" href="./manga_info.php?title=<?php echo $file[0]; ?>&folder=<?php echo $file[1]; ?>" class="<?php echo $file[1]; ?> <?php if(is_file("./system/addon/dump/like/".$file[1]."---".$file[0].".like")) { echo "즐겨찾기"; } ?> item">
+			      <div class="card">
+			        <div class="card-header text-center">
+			          <div class="item-name"><?php echo $file[0]; ?></div>
+			          <div class="item-category">메타데이터가 등록되지 않음</div>
+			        </div>
+			        <?php if (!is_dir("./system/setting/noimg")): ?>
+			          <img class="card-img-bottom lazy" data-original="./system/dthumb.png" />
+			        <?php endif; ?>
+			      </div>
+			    </a>
+			    <?php
+			  } else {
+			    ?>
+			    <a title="<?php echo $file[1]; ?>/<?php echo $file[0]; ?>" href="./manga_info.php?title=<?php echo $file[0]; ?>&folder=<?php echo $file[1]; ?>#id=<?php $fp = fopen("./metadata/titles/$file[1]-$file[0]/titleid.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file[1]-$file[0]/titleid.txt")); fclose($fp); echo $fr; ?>" class="<?php $fp = fopen("./metadata/titles/$file[1]-$file[0]/genre.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file[1]-$file[0]/genre.txt")); fclose($fp); echo $fr; ?> <?php echo $file[1]; ?> <?php if(is_file("./system/addon/dump/like/".$file[1]."---".$file[0].".like")) { echo "즐겨찾기"; } ?> item">
+			      <div class="card">
+			        <div class="card-header text-center">
+			          <div class="item-name"><?php echo $file[0]; ?></div>
+			          <div class="item-category"><?php $fp = fopen("./metadata/titles/$file[1]-$file[0]/writer.txt","r"); $fr = fread($fp, filesize("./metadata/titles/$file[1]-$file[0]/writer.txt")); fclose($fp); echo $fr; ?></div>
+			        </div>
+			        <?php if (!is_dir("./system/setting/noimg")): ?>
+			          <img class="card-img-bottom lazy" data-original="./metadata/titles/<?php echo str_replace("+", "%20", urlencode($file[1].'-'.$file[0])); ?>/thumb.jpg">
+			        <?php endif; ?>
+			      </div>
+			    </a>
+			    <?php
+			  }
 			}
 		}
 		?>

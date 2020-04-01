@@ -219,6 +219,11 @@ if($type == "zip"){
       <script src="./asset/js/modernizr.js"></script>
       <script src="./asset/js/viewer.js"></script>
 			<?php
+			if (file_exists("./system/addon/looked.php")) {
+				include("./system/addon/lookedgen.php");
+			}
+
+
 			$dir = "./data/temp/";
 			$files = array();
 			if (is_dir($dir)){

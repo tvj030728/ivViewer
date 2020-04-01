@@ -51,6 +51,11 @@ for($i=0; $i<sizeof($mAgent); $i++){
 				<h5 class="header-sub-title mt-2">#<?php $fp = fopen("./metadata/titles/".$_GET['folder']."-".$_GET['title']."/genre.txt","r"); $fr = fread($fp, filesize("./metadata/titles/".$_GET['folder']."-".$_GET['title']."/genre.txt")); fclose($fp); echo str_replace(" ", " #", $fr); ?></h5>
 				<?php if($chkMobile) {} else {echo "<br>";} ?>
 				<h5 class="header-sub-title mt-2"><?php $fp = fopen("./metadata/titles/".$_GET['folder']."-".$_GET['title']."/detail.txt","r"); $fr = fread($fp, filesize("./metadata/titles/".$_GET['folder']."-".$_GET['title']."/detail.txt")); fclose($fp); echo $fr; ?></h5>
+				<?php
+				if (file_exists("./system/addon/like.php")) {
+					include("./system/addon/like.php");
+				}
+				 ?>
 			</div>
 		</div>
 	</div>
@@ -87,7 +92,10 @@ for($i=0; $i<sizeof($mAgent); $i++){
 					$put2 = $put2 . $p2 . " ";
 				}
 			}
-			$put = str_replace($_GET['title']." ", "", $put2);;
+			$put = str_replace($_GET['title']." ", "", $put2);
+			if (file_exists("./system/addon/looked.php")) {
+				include("./system/addon/looked.php");
+			} else {
 			?>
 			<a href="./viewer.php?title=<?php echo urlencode($_GET['title']); ?>&episode=<?php echo urlencode($originput); ?>&folder=<?php echo $_GET[folder]; ?>" class="item">
 				<div class="card">
@@ -97,6 +105,7 @@ for($i=0; $i<sizeof($mAgent); $i++){
 				</div>
 			</a>
 			<?php
+			}
 		}
 		?>
 	</div>
