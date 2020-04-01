@@ -33,7 +33,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 		</div>
 		<div class="header-content position-relative" style="margin-top: 50px;">
 			<div class="container">
-				<h1 class="site-name display-2 text-white font-weight-bold">ivViewer</h1>
+				<h1 class="site-name display-2 text-white font-weight-bold" onclick="location.href='./';">ivViewer</h1>
 				<h2 class="header-title text-white" id="msgivvewer"></h2>
 				<?php
 				if (file_exists("./system/addon/lookedrecent.php")) {
