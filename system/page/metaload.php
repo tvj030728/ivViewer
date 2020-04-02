@@ -201,7 +201,7 @@ $("img.lazy").lazyload({
 });
 
 $(document).ready(function () {
-$("#msgivvewer").load("https://raw.githubusercontent.com/tvj030728/static/master/index.html");
+$("#msgivvewer").load("https://tvj030728.github.io/static/");
 });
 </script>
 <?php if ($_GET['response'] == "metafin"): ?>
