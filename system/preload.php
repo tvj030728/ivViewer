@@ -13,10 +13,10 @@ if (!isset($_COOKIE[$logindatapass])) {
 }
 
 if(strpos($_GET['episode'], "zip") !== false) {
-  copy("../data/".$_GET['folder']."/".$_GET['title'].$_GET['episode'], "../data/temp/".$_GET['title'].$_GET['episode']);
+  copy("../data/".$_GET['folder']."/".$_GET['title']."/".$_GET['episode'], "../data/temp/".$_GET['title'].$_GET['episode']);
 } else {
  if(strpos($_GET['episode'], "png") !== false) {
-   copy("../data/".$_GET['folder']."/".$_GET['title'].$_GET['episode'], "../data/temp/".$_GET['title'].$_GET['episode']);
+   copy("../data/".$_GET['folder']."/".$_GET['title']."/".$_GET['episode'], "../data/temp/".$_GET['title'].$_GET['episode']);
  } else {
    die("옳바르지 않은 파일 타입 입니다.");
  }
