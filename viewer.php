@@ -180,7 +180,7 @@ if($type == "zip"){
 			 <?php if (count($episodeselect) != $next): ?>
 				 <script type="text/javascript">
 				 $(document).ready(function () {
-					 	$.get("./system/preload.php?title=<?php echo urlencode($_GET['title']);?>&episode=<?php echo urlencode($episodeselect[$next]);?>", function(data) {});
+					 	$.get("./system/preload.php?title=<?php echo urlencode($_GET['title']);?>&episode=<?php echo urlencode($episodeselect[$next]);?>&folder=<?php echo $_GET['folder'];?>", function(data) {});
 					});
 				 </script>
 			 <?php endif; ?>
