@@ -43,10 +43,8 @@ for($i=0; $i<sizeof($mAgent); $i++){
 		</div>
 		<div class="header-content position-relative" style="margin-top: 50px;">
 			<div class="container">
-				<h5 class="header-sub-title mt-2" style="cursor:pointer;" onclick="location.href='./';">< 메인페이지</h5>
-				<br>
 				<img src="./metadata/titles/<?php echo $_GET['folder']; ?>-<?php echo str_replace("+", "%20", urlencode($_GET['title'])); ?>/thumb.jpg" style="border-radius: <?php if($chkMobile) {echo '1';} else {echo '1';} ?>%;" <?php if($chkMobile) {echo "width='100%'";} ?>>
-				<br>
+				<br><br>
 				<h1 class="site-name display-2 text-white font-weight-bold"><?php echo $_GET['title']; ?></h1>
 				<h2 class="header-title text-white"><?php $fp = fopen("./metadata/titles/".$_GET['folder']."-".$_GET['title']."/writer.txt","r"); $fr = fread($fp, filesize("./metadata/titles/".$_GET['folder']."-".$_GET['title']."/writer.txt")); fclose($fp); echo $fr; ?></h2>
 				<?php if($chkMobile) {} else {echo "<br>";} ?>
