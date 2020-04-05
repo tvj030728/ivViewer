@@ -33,7 +33,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 		</div>
 		<div class="header-content position-relative" style="margin-top: 50px;">
 			<div class="container">
-				<h1 class="site-name display-2 text-white font-weight-bold">설정</h1>
+				<h1 class="site-name display-2 text-white font-weight-bold" style="cursor:pointer;" onclick="location.href='./';">설정</h1>
         <h5 class="header-sub-title mt-2">
           <span style="cursor:pointer;" onclick="location.href='https://blog.ivlis.kr/archives/tag/ivviewer';">
             설정은 개발자 블로그를 참조하세요.
