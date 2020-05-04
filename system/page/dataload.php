@@ -70,7 +70,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 				if (is_dir($dir)){
 					if ($dh = opendir($dir)){
 						while (($file = readdir($dh)) !== false){
-							if($file == "." || $file == ".." || $file == "temp") { continue; } else {
+							if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir" || $file == "temp") { continue; } else {
 								array_push($filess, $file);
 								?>
 								<li class="nav-item">
@@ -88,7 +88,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 				if (is_dir($dir)){
 				  if ($dh = opendir($dir)){
 				    while (($file = readdir($dh)) !== false){
-							if($file == "." || $file == "..") { continue; } else {
+							if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
 					?>
 					<li class="nav-item">
 						<a href="#" class="nav-link" data-filter=".<?php echo $file; ?>"><?php echo $file; ?></a>
@@ -120,7 +120,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 			if (is_dir($dir)){
 				if ($dh = opendir($dir)){
 					while (($file = readdir($dh)) !== false){
-						if($file == "." || $file == "..") { continue; } else {
+						if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
 							array_push($files, array($file, $filesss));
 						}
 					}

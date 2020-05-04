@@ -23,7 +23,7 @@ if ($action == 'start') {
   if (is_dir($dir)){
     if ($dh = opendir($dir)){
       while (($file = readdir($dh)) !== false){
-        if($file == "." || $file == ".." || $file == "temp") { continue; } else {
+        if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir" || $file == "temp") { continue; } else {
           mkdir("./temp/".$file);
           $continue[] = $file;
         }
@@ -40,7 +40,7 @@ if ($action == 'continue') {
   if (is_dir($dir)){
     if ($dh = opendir($dir)){
       while (($file = readdir($dh)) !== false){
-        if($file == "." || $file == ".." || $file == "temp") { continue; } else {
+        if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir" || $file == "temp") { continue; } else {
           $continue[] = $file;
         }
       }

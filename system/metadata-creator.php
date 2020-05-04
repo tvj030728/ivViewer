@@ -45,7 +45,7 @@ if (!isset($_GET['title'])) {
   if (is_dir($dir)){
     if ($dh = opendir($dir)){
       while (($file = readdir($dh)) !== false){
-        if($file == "." || $file == "..") { continue; } else {
+        if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
           array_push($processed, str_replace($_GET['folder']."-", "", $file));
         }
       }
@@ -57,7 +57,7 @@ if (!isset($_GET['title'])) {
   if (is_dir($dir)){
     if ($dh = opendir($dir)){
       while (($file = readdir($dh)) !== false){
-        if($file == "." || $file == "..") { continue; } else {
+        if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
           array_push($processing, $file);
         }
       }
@@ -175,7 +175,7 @@ $titleget = $_GET['title'];
 						if (is_dir($dir)){
 							if ($dh = opendir($dir)){
 								while (($file = readdir($dh)) !== false){
-									if($file == "." || $file == "..") { continue; } else {
+									if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
 										array_push($processed, str_replace($_GET['folder']."-", "", $file));
 									}
 								}
@@ -187,7 +187,7 @@ $titleget = $_GET['title'];
 						if (is_dir($dir)){
 							if ($dh = opendir($dir)){
 								while (($file = readdir($dh)) !== false){
-									if($file == "." || $file == "..") { continue; } else {
+									if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
 										array_push($processing, $file);
 									}
 								}
@@ -299,7 +299,7 @@ $titleget = $_GET['title'];
 							if (is_dir($dir)){
 								if ($dh = opendir($dir)){
 									while (($file = readdir($dh)) !== false){
-										if($file == "." || $file == "..") { continue; } else {
+										if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
 											array_push($processed, str_replace($_GET['folder']."-", "", $file));
 										}
 									}
@@ -311,7 +311,7 @@ $titleget = $_GET['title'];
 							if (is_dir($dir)){
 								if ($dh = opendir($dir)){
 									while (($file = readdir($dh)) !== false){
-										if($file == "." || $file == "..") { continue; } else {
+										if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
 											array_push($processing, $file);
 										}
 									}
@@ -382,7 +382,7 @@ $titleget = $_GET['title'];
 							if (is_dir($dir)){
 								if ($dh = opendir($dir)){
 									while (($file = readdir($dh)) !== false){
-										if($file == "." || $file == "..") { continue; } else {
+										if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
 											array_push($processed, str_replace($_GET['folder']."-", "", $file));
 										}
 									}
@@ -394,7 +394,7 @@ $titleget = $_GET['title'];
 							if (is_dir($dir)){
 								if ($dh = opendir($dir)){
 									while (($file = readdir($dh)) !== false){
-										if($file == "." || $file == "..") { continue; } else {
+										if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
 											array_push($processing, $file);
 										}
 									}
@@ -487,7 +487,7 @@ $titleget = $_GET['title'];
 					if (is_dir($dir)){
 						if ($dh = opendir($dir)){
 							while (($file = readdir($dh)) !== false){
-								if($file == "." || $file == "..") { continue; } else {
+								if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
 									array_push($processed, str_replace($_GET['folder']."-", "", $file));
 								}
 							}
@@ -499,7 +499,7 @@ $titleget = $_GET['title'];
 					if (is_dir($dir)){
 						if ($dh = opendir($dir)){
 							while (($file = readdir($dh)) !== false){
-								if($file == "." || $file == "..") { continue; } else {
+								if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
 									array_push($processing, $file);
 								}
 							}
@@ -672,7 +672,7 @@ $dir = "../metadata/titles/";
 if (is_dir($dir)){
   if ($dh = opendir($dir)){
     while (($file = readdir($dh)) !== false){
-      if($file == "." || $file == "..") { continue; } else {
+      if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
         array_push($processed, str_replace($_GET['folder']."-", "", $file));
       }
     }
@@ -684,7 +684,7 @@ $dir = $basefolder;
 if (is_dir($dir)){
   if ($dh = opendir($dir)){
     while (($file = readdir($dh)) !== false){
-      if($file == "." || $file == "..") { continue; } else {
+      if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
         array_push($processing, $file);
       }
     }

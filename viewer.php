@@ -229,7 +229,7 @@ if($type == "zip"){
 			if (is_dir($dir)){
 				if ($dh = opendir($dir)){
 					while (($file = readdir($dh)) !== false){
-						if($file == "." || $file == "..") { continue; } else {
+						if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
 							if (strtotime(date("Y-m-d H:i:s")) - strtotime(date("Y-m-d H:i:s", filemtime("./data/temp/".$file))) >= 3600) {
 								unlink("./data/temp/".$file);
 							}

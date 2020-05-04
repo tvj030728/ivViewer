@@ -70,7 +70,7 @@ for($i=0; $i<sizeof($mAgent); $i++){
 		if (is_dir($dir)){
 			if ($dh = opendir($dir)){
 				while (($file = readdir($dh)) !== false){
-					if($file == "." || $file == "..") { continue; } else {
+					if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
 						if(strpos($file, "zip") !== false or strpos($file, "png") !== false) {
 						    array_push($files, $file);
 						}
