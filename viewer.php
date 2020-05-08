@@ -21,7 +21,7 @@ $basefolder = "data/".$_GET['folder']."/";
 
 $randcode = rand(1,20);
 
-if(strpos($_GET['episode'], "zip") !== false) {
+if(strpos($_GET['episode'], "zip") !== false or strpos($_GET['episode'], "cbz") !== false) {
 	$type = "zip";
 } else {
 	if(strpos($_GET['episode'], "png") !== false) {
@@ -31,7 +31,7 @@ if(strpos($_GET['episode'], "zip") !== false) {
 	}
 }
 
-if($type == "zip"){
+if($type == "zip" or $type == "cbz"){
 	if (file_exists("data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode']))) {
 	} else {
 		copy($basefolder."/".$_GET['title']."/".$_GET['episode'], "data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode']));
@@ -51,7 +51,7 @@ if($type == "zip"){
 	function imgsrc($file){
 	  $load = "zip://data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode'])."#".$file;
 	  $data = file_get_contents($load);
-	  echo "<img alt='$file' src='data:image/jpeg;base64,".base64_encode($data)."' />";
+	  echo "<img alt='$file' src='data:".mime_content_type($load).";base64,".base64_encode($data)."' />";
 	}
 
 	//realname
@@ -66,7 +66,7 @@ if($type == "zip"){
 		}
 	}
 	$put2 = str_replace($_GET['title']." ", "", $put2);
-	$episode = str_replace(".zip", "", $put2);
+	$episode = str_replace(".zip", "", str_replace(".cbz", "", $put2));
 } elseif ($type == "png") {
 	if (file_exists("data/temp/".$_GET['title'].str_replace('#', '', $_GET['episode']))) {
 	} else {

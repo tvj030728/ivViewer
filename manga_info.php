@@ -71,7 +71,7 @@ for($i=0; $i<sizeof($mAgent); $i++){
 			if ($dh = opendir($dir)){
 				while (($file = readdir($dh)) !== false){
 					if($file == "." || $file == ".." || $file == ".DS_Store" || $file == "@eaDir") { continue; } else {
-						if(strpos($file, "zip") !== false or strpos($file, "png") !== false) {
+						if(strpos($file, "zip") !== false or strpos($file, "cbz") !== false or strpos($file, "png") !== false) {
 						    array_push($files, $file);
 						}
 					}
@@ -100,7 +100,7 @@ for($i=0; $i<sizeof($mAgent); $i++){
 			<a href="./viewer.php?title=<?php echo urlencode($_GET['title']); ?>&episode=<?php echo urlencode($originput); ?>&folder=<?php echo $_GET[folder]; ?>" class="item">
 				<div class="card">
 					<div class="card-header text-center">
-						<div class="item-name"><?php echo str_replace(".zip", "", str_replace(".png", "", $put)); ?></div>
+						<div class="item-name"><?php echo str_replace(".zip", "", str_replace(".png", "", str_replace(".cbz", "", $put))); ?></div>
 					</div>
 				</div>
 			</a>
