@@ -154,7 +154,7 @@ if($type == "zip" or $type == "cbz"){
 
          foreach ($files as $file) {
              if (!in_array($file, $blacklist)) {
-							 if(strpos($file, "zip") !== false or strpos($file, "png") !== false) {
+							 if(strpos($file, "zip") !== false or strpos($file, "cbz") !== false or strpos($file, "png") !== false) {
 									 $episodeselect[] = $file;
 							 }
              }

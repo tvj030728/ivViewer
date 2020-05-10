@@ -191,6 +191,11 @@ if (!isset($_COOKIE[$logindatapass])) {
 <script src="asset/js/isotope.pkgd.min.js"></script>
 <script src="asset/js/script.js"></script>
 <script src="asset/js/jquery.lazyload.min.js"></script>
+<?php
+$domain = $_SERVER["HTTP_HOST"].str_replace("index.php", "", $_SERVER['PHP_SELF']);
+$fp = fopen("./version.php","r"); $currentversion = fread($fp, filesize("./version.php")); fclose($fp);
+$valcheckurl = "https://static.ivlis.kr/ivViewer/update_check.php?version=$currentversion&domain=$domain";
+ ?>
 <script>
 $("img.lazy").lazyload({
  effect : "fadeIn",
@@ -198,7 +203,7 @@ $("img.lazy").lazyload({
 });
 
 $(document).ready(function () {
-$("#msgivvewer").load("https://tvj030728.github.io/static/");
+$("#msgivvewer").load("<?php echo $valcheckurl; ?>");
 });
 </script>
 <?php if ($_GET['response'] == "metafin"): ?>
