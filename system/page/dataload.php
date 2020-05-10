@@ -194,6 +194,7 @@ if (!isset($_COOKIE[$logindatapass])) {
 <?php
 $domain = $_SERVER["HTTP_HOST"].str_replace("index.php", "", $_SERVER['PHP_SELF']);
 $fp = fopen("./version.php","r"); $currentversion = fread($fp, filesize("./version.php")); fclose($fp);
+$currentversion = str_replace("\n", "", $currentversion);
 $valcheckurl = "https://static.ivlis.kr/ivViewer/update_check.php?version=$currentversion&domain=$domain";
  ?>
 <script>
