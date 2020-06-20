@@ -100,7 +100,7 @@ for($i=0; $i<sizeof($mAgent); $i++){
 			<a href="./viewer.php?title=<?php echo urlencode($_GET['title']); ?>&episode=<?php echo urlencode($originput); ?>&folder=<?php echo $_GET[folder]; ?>" class="item">
 				<div class="card">
 					<div class="card-header text-center">
-						<div class="item-name"><?php echo str_replace(".zip", "", str_replace(".png", "", str_replace(".cbz", "", $put))); ?></div>
+						<div class="item-name" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"><?php echo str_replace(".zip", "", str_replace(".png", "", str_replace(".cbz", "", $put))); ?></div>
 					</div>
 				</div>
 			</a>
