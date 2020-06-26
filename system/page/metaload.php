@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 $logindata = json_decode(file_get_contents('./config.json'), true);
 $logindatauser = $logindata[user];
 $logindatapass =$logindata[pass];
