@@ -80,14 +80,14 @@ $titleget = $_GET['title'];
       include('simple_html_dom.php');
 
       //웹툰 검색페이지
-      $html = file_get_html('https://m.comic.naver.com/search/result.nhn?searchType=WEBTOON&keyword='.urlencode($titleget));
+      $html = file_get_html('https://m.comic.naver.com/search/result?searchType=WEBTOON&keyword='.urlencode($titleget));
 
       //title id 파싱
       $list = array();
 			foreach($html->find('a') as $result){
-				if(strpos($result->href, 'list.nhn') !== false) {
+				if(strpos($result->href, 'list') !== false) {
 						if ($result->find('strong')[0]->plaintext == $titleget) {
-							array_push($list, str_replace('/webtoon/list.nhn?titleId=', '', $result->href));
+							array_push($list, str_replace('/webtoon/list?titleId=', '', $result->href));
 						}
         }
       }
@@ -531,7 +531,7 @@ $titleget = $_GET['title'];
       }
 
       //웹툰 상세주소(pc버전 기준)
-      $html = file_get_html('https://comic.naver.com/webtoon/list.nhn?titleId='.$titleid);
+      $html = file_get_html('https://comic.naver.com/webtoon/list?titleId='.$titleid);
 
       //제목
       foreach($html->find('title') as $element){
@@ -584,7 +584,7 @@ $titleget = $_GET['title'];
       //고화질 섬네일 찾아 생성
         //모바일 페이지
         $gqthumbox = "1";
-        $html = file_get_html('https://m.comic.naver.com/webtoon/list.nhn?titleId='.$titleid);
+        $html = file_get_html('https://m.comic.naver.com/webtoon/list?titleId='.$titleid);
       $gqthumb = array();
       define("WIDTH", 436);
       define("HEIGHT", 348);
